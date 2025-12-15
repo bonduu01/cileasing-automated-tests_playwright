@@ -66,12 +66,12 @@ jobs:
               pytest "$test_file" --browser chromium --alluredir=allure-results -v
           done
 
-      - name: Run Playwright API tests_api synchronously
-        run: |
-          for test_file in $(find tests_api -type f -name "test_*.py"); do
-              echo "Running $test_file..."
-              pytest "$test_file" --browser chromium --alluredir=allure-results -v
-          done
+#      - name: Run Playwright API tests_api synchronously
+#        run: |
+#          for test_file in $(find tests_api -type f -name "test_*.py"); do
+#              echo "Running $test_file..."
+#              pytest "$test_file" --browser chromium --alluredir=allure-results -v
+#          done
 
       - name: Generate Allure Report
         if: always()

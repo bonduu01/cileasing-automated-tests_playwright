@@ -1,0 +1,168 @@
+name: Playwright Tests with Allure and GitHub Pages Deployment
+on:
+  push:
+    branches: [ test ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      matrix:
+        browser: [chromium]  # Only chromium
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install allure-pytest playwright
+
+      - name: Install Playwright Chromium
+        run: |
+          python -m playwright install chromium --with-deps
+
+      - name: Install Allure CLI
+        run: |
+          LATEST_URL=$(curl -s https://api.github.com/repos/allure-framework/allure2/releases/latest \
+            | grep browser_download_url \
+            | grep zip \
+            | cut -d '"' -f 4)
+          echo "Downloading Allure from: $LATEST_URL"
+          wget $LATEST_URL -O allure.zip
+          sudo apt-get update
+          sudo apt-get install -y unzip default-jre
+          unzip allure.zip
+          ALLURE_DIR=$(find . -mindepth 1 -maxdepth 1 -type d -name "allure-[0-9]*" | head -n 1)
+          sudo mv "$ALLURE_DIR" /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+          allure --version
+
+      - name: Run Playwright Page tests_pages synchronously
+        run: |
+          mkdir -p allure-results
+          for test_file in $(find tests_pages -type f -name "test_*.py"); do
+              echo "Running $test_file..."
+              pytest "$test_file" --browser chromium --alluredir=allure-results -v
+          done
+
+      - name: Run Playwright API tests_api synchronously
+        run: |
+          for test_file in $(find tests_api -type f -name "test_*.py"); do
+              echo "Running $test_file..."
+              pytest "$test_file" --browser chromium --alluredir=allure-results -v
+          done
+
+      - name: Generate Allure Report
+        if: always()
+        run: |
+          rm -rf allure-report
+          allure generate allure-results -o allure-report --clean
+          ls -la allure-report
+
+      - name: Zip Allure Report
+        if: always()
+        run: |
+          zip -r allure-report.zip allure-report
+
+      - name: Upload Allure artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report
+          path: |
+            allure-results
+            allure-report.zip
+          retention-days: 30
+
+      - name: Verify Allure Report Directory
+        if: always()
+        run: |
+          echo "Checking allure-report directory..."
+          ls -la allure-report/
+          echo "Total files in allure-report:"
+          find allure-report -type f | wc -l
+
+      - name: Setup Pages
+        if: always()
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact for GitHub Pages
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './allure-report'
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Output Pages URL
+        if: always()
+        run: |
+          echo "Allure Report deployed to: ${{ steps.deployment.outputs.page_url }}"
+
+      # Netlify deployment (commented out)
+      # - name: Deploy Allure Report to Netlify
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #   run: |
+      #     # Install Netlify CLI
+      #     npm install -g netlify-cli@latest
+      #
+      #     # Verify environment variables are set
+      #     if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
+      #       echo "Error: NETLIFY_AUTH_TOKEN is not set"
+      #       exit 1
+      #     fi
+      #
+      #     if [ -z "$NETLIFY_SITE_ID" ]; then
+      #       echo "Error: NETLIFY_SITE_ID is not set"
+      #       exit 1
+      #     fi
+      #
+      #     echo "Deploying to Netlify..."
+      #     echo "Site ID: $NETLIFY_SITE_ID"
+      #
+      #     # Deploy using Netlify CLI
+      #     netlify deploy \
+      #       --dir=allure-report \
+      #       --prod \
+      #       --auth="$NETLIFY_AUTH_TOKEN" \
+      #       --site="$NETLIFY_SITE_ID" \
+      #       --message="Automated Allure report deploy - Build ${{ github.run_number }}" \
+      #       --json > deploy-output.json
+      #
+      #     # Check if deployment was successful
+      #     if [ $? -eq 0 ]; then
+      #       echo "Deployment successful!"
+      #       cat deploy-output.json
+      #       DEPLOY_URL=$(cat deploy-output.json | grep -o '"deploy_url":"[^"]*"' | cut -d'"' -f4)
+      #       echo "Report URL: $DEPLOY_URL"
+      #     else
+      #       echo "Deployment failed!"
+      #       cat deploy-output.json
+      #       exit 1
+      #     fi

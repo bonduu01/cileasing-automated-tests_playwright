@@ -14,7 +14,7 @@ def playwright_instance() -> Generator[Playwright, Any, None]:
 @pytest.fixture(scope="session")
 def browser(playwright_instance: Playwright) -> Generator[Browser, Any, None]:
     """Session-scoped browser fixture. Browser is created once and reused across all tests_pages."""
-    browser = playwright_instance.chromium.launch(headless=True)
+    browser = playwright_instance.chromium.launch(headless=False)
     yield browser
     browser.close()
 

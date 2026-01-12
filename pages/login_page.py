@@ -14,7 +14,7 @@ class LoginPage(BasePage):
 
     def __init__(self, page: Page) -> None:
         super().__init__(page)
-        self.url = settings.login_url
+        self.url = settings.base_url
 
     def go_to_login_page(self) -> None:
         """Navigate to the login page."""
@@ -34,12 +34,31 @@ class LoginPage(BasePage):
         self.fill_input(LOGIN_PAGE.EMAIL_INPUT, email)
         self.fill_input(LOGIN_PAGE.PASSWORD_INPUT, password)
         self.click_element(LOGIN_PAGE.SUBMIT_BUTTON)
+        self.wait(5000)
+
+    def enter_email(self, email: str) -> None:
+        """Enter email address."""
+        self.fill_input(LOGIN_PAGE.EMAIL_INPUT, email)
+
+    def enter_password(self, password: str) -> None:
+        """Enter password."""
+        self.fill_input(LOGIN_PAGE.PASSWORD_INPUT, password)
+
+    def click_login_button(self) -> None:
+        """Click the login button."""
+        self.click_element(LOGIN_PAGE.SUBMIT_BUTTON)
+
+    # def verify_login_form_visible(self) -> None:
+    #     """Verify login form elements are visible."""
+    #     self.verify_element_visible(LOGIN_PAGE.EMAIL_INPUT)
+    #     self.verify_element_visible(LOGIN_PAGE.PASSWORD_INPUT)
+    #     self.verify_element_visible(LOGIN_PAGE.SUBMIT_BUTTON)
 
     def verify_error_message(self, message: str) -> None:
         """Assert an error message is displayed."""
         self.verify_text_visible(message)
 
-    def verify_login_successful(self, redirect_url: str | None = None) -> None:
-        """Assert login was successful by checking URL change."""
-        if redirect_url:
-            self.wait_for_url(redirect_url)
+    def verify_login_successful_load_companies(self) -> None:
+        """Assert that the login successful message is displayed"""
+        self.verify_element_visible(LOGIN_PAGE.DEFAULT_COMPANY)
+        self.verify_element_visible(LOGIN_PAGE.FLOUR_MILLS_COMPANY)

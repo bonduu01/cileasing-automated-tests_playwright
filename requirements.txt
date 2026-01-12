@@ -17,5 +17,5 @@ pytest-xdist>=3.5.0
 
 # Optional: Code quality
 black>=24.0.0
-ruff>=0.1.0
+ruff>=0.14.11
 mypy>=1.8.0

@@ -19,6 +19,8 @@ class LoginPageSelectors:
     PASSWORD_INPUT: str = 'input[name="password"]'
     SUBMIT_BUTTON: str = 'button[type="submit"][buttontype="primary"]'
     PASSWORD_DISABLED: str = "input[name='password'][type='password']"
+    DEFAULT_COMPANY: str = 'div.space-y-4 div.uppercase:text-is("DEFAULT")'
+    FLOUR_MILLS_COMPANY: str = 'div.space-y-4 div.uppercase:text-is("FLOUR MILLS NIGERIA LIMITED GOLDEN NOODLES & PASTA IGANMU")'
 
 
 # Create singleton instances

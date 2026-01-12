@@ -1,6 +1,9 @@
 name: Playwright Tests with Allure and GitHub Pages Deployment
+
 on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
   workflow_dispatch:
 
@@ -11,8 +14,12 @@ permissions:
 
 # Allow only one concurrent deployment
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: "3.14"
+  PLAYWRIGHT_BROWSERS_PATH: 0
 
 jobs:
   test:
@@ -20,8 +27,9 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        browser: [chromium]  # Only chromium
+        browser: [chromium]
       fail-fast: false
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,140 +37,159 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
 
-      - name: Install dependencies
+      # ============================================
+      # Environment Variables Setup
+      # ============================================
+      - name: Create .env file from secrets
         run: |
-          python -m pip install --upgrade pip
+          cat > .env << EOF
+          # Application Configuration
+          BASE_URL=${{ secrets.BASE_URL || 'https://thirdparty.sabi.am:8443' }}
+          API_BASE_URL=${{ secrets.API_BASE_URL || 'https://thirdparty.sabi.am:8443' }}
+          
+          # Authentication
+          USERNAME=${{ secrets.TEST_USERNAME || '' }}
+          PASSWORD=${{ secrets.TEST_PASSWORD || '' }}
+          API_KEY=${{ secrets.API_KEY || '' }}
+          API_SECRET=${{ secrets.API_SECRET || '' }}
+          
+          # Test Configuration
+          HEADLESS=${{ secrets.HEADLESS || 'true' }}
+          BROWSER=${{ matrix.browser }}
+          TIMEOUT=${{ secrets.TIMEOUT || '30000' }}
+          SCREENSHOT_ON_FAILURE=${{ secrets.SCREENSHOT_ON_FAILURE || 'true' }}
+          
+          # Environment
+          ENVIRONMENT=${{ secrets.ENVIRONMENT || 'staging' }}
+          CI=true
+          GITHUB_RUN_ID=${{ github.run_id }}
+          GITHUB_RUN_NUMBER=${{ github.run_number }}
+          GITHUB_SHA=${{ github.sha }}
+          
+          # Optional: Database or other service URLs
+          DB_HOST=${{ secrets.DB_HOST || '' }}
+          DB_PORT=${{ secrets.DB_PORT || '' }}
+          DB_NAME=${{ secrets.DB_NAME || '' }}
+          DB_USER=${{ secrets.DB_USER || '' }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD || '' }}
+          
+          # Optional: Third-party services
+          SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK || '' }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN || '' }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID || '' }}
+          EOF
+          
+          echo "✅ .env file created successfully"
+          echo "📋 Environment variables (masked):"
+          cat .env | grep -v -E "PASSWORD|SECRET|TOKEN|KEY" || true
+
+      - name: Verify .env file
+        run: |
+          if [ -f .env ]; then
+            echo "✅ .env file exists"
+            echo "📊 .env file size: $(wc -c < .env) bytes"
+            echo "📝 Number of variables: $(grep -c "=" .env || echo 0)"
+          else
+            echo "❌ .env file not found!"
+            exit 1
+          fi
+
+      # ============================================
+      # Install Dependencies
+      # ============================================
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
-          pip install allure-pytest playwright
+          pip install allure-pytest playwright python-dotenv
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
 
       - name: Install Playwright Chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: |
           python -m playwright install chromium --with-deps
 
+      # ============================================
+      # Install Allure CLI
+      # ============================================
+      - name: Cache Allure CLI
+        id: allure-cache
+        uses: actions/cache@v4
+        with:
+          path: /opt/allure
+          key: ${{ runner.os }}-allure-cli
+
       - name: Install Allure CLI
+        if: steps.allure-cache.outputs.cache-hit != 'true'
         run: |
           LATEST_URL=$(curl -s https://api.github.com/repos/allure-framework/allure2/releases/latest \
             | grep browser_download_url \
             | grep zip \
             | cut -d '"' -f 4)
-          echo "Downloading Allure from: $LATEST_URL"
-          wget $LATEST_URL -O allure.zip
-          sudo apt-get update
-          sudo apt-get install -y unzip default-jre
-          unzip allure.zip
+          echo "📥 Downloading Allure from: $LATEST_URL"
+          wget -q $LATEST_URL -O allure.zip
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq unzip default-jre
+          unzip -q allure.zip
           ALLURE_DIR=$(find . -mindepth 1 -maxdepth 1 -type d -name "allure-[0-9]*" | head -n 1)
           sudo mv "$ALLURE_DIR" /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+          sudo ln -sf /opt/allure/bin/allure /usr/bin/allure
+
+      - name: Verify Allure installation
+        run: |
           allure --version
+          echo "✅ Allure CLI installed successfully"
 
-      - name: Run Playwright Page tests_pages synchronously
+      # ============================================
+      # Load Environment Variables
+      # ============================================
+      - name: Load environment variables
         run: |
-          mkdir -p allure-results
-          for test_file in $(find tests_pages -type f -name "test_*.py"); do
-              echo "Running $test_file..."
-              pytest "$test_file" --browser chromium --alluredir=allure-results -v
-          done
+          set -a
+          source .env
+          set +a
+          echo "✅ Environment variables loaded"
+          echo "🌐 BASE_URL: ${BASE_URL:-not set}"
+          echo "🔧 ENVIRONMENT: ${ENVIRONMENT:-not set}"
+          echo "🎭 BROWSER: ${BROWSER:-not set}"
 
-#      - name: Run Playwright API tests_api synchronously
-#        run: |
-#          for test_file in $(find tests_api -type f -name "test_*.py"); do
-#              echo "Running $test_file..."
-#              pytest "$test_file" --browser chromium --alluredir=allure-results -v
-#          done
+      # ============================================
+      # Run Tests
+      # ============================================
+      - name: Create results directory
+        run: mkdir -p allure-results
 
-      - name: Generate Allure Report
-        if: always()
+      - name: Run Playwright Page Tests
         run: |
-          rm -rf allure-report
-          allure generate allure-results -o allure-report --clean
-          ls -la allure-report
-
-      - name: Zip Allure Report
-        if: always()
-        run: |
-          zip -r allure-report.zip allure-report
-
-      - name: Upload Allure artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-report
-          path: |
-            allure-results
-            allure-report.zip
-          retention-days: 30
-
-      - name: Verify Allure Report Directory
-        if: always()
-        run: |
-          echo "Checking allure-report directory..."
-          ls -la allure-report/
-          echo "Total files in allure-report:"
-          find allure-report -type f | wc -l
-
-      - name: Setup Pages
-        if: always()
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact for GitHub Pages
-        if: always()
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './allure-report'
-
-      - name: Deploy to GitHub Pages
-        if: always()
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-      - name: Output Pages URL
-        if: always()
-        run: |
-          echo "Allure Report deployed to: ${{ steps.deployment.outputs.page_url }}"
-
-      # Netlify deployment (commented out)
-      # - name: Deploy Allure Report to Netlify
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #   run: |
-      #     # Install Netlify CLI
-      #     npm install -g netlify-cli@latest
-      #
-      #     # Verify environment variables are set
-      #     if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
-      #       echo "Error: NETLIFY_AUTH_TOKEN is not set"
-      #       exit 1
-      #     fi
-      #
-      #     if [ -z "$NETLIFY_SITE_ID" ]; then
-      #       echo "Error: NETLIFY_SITE_ID is not set"
-      #       exit 1
-      #     fi
-      #
-      #     echo "Deploying to Netlify..."
-      #     echo "Site ID: $NETLIFY_SITE_ID"
-      #
-      #     # Deploy using Netlify CLI
-      #     netlify deploy \
-      #       --dir=allure-report \
-      #       --prod \
-      #       --auth="$NETLIFY_AUTH_TOKEN" \
-      #       --site="$NETLIFY_SITE_ID" \
-      #       --message="Automated Allure report deploy - Build ${{ github.run_number }}" \
-      #       --json > deploy-output.json
-      #
-      #     # Check if deployment was successful
-      #     if [ $? -eq 0 ]; then
-      #       echo "Deployment successful!"
-      #       cat deploy-output.json
-      #       DEPLOY_URL=$(cat deploy-output.json | grep -o '"deploy_url":"[^"]*"' | cut -d'"' -f4)
-      #       echo "Report URL: $DEPLOY_URL"
-      #     else
-      #       echo "Deployment failed!"
-      #       cat deploy-output.json
-      #       exit 1
-      #     fi
+          export $(cat .env | xargs)
+          echo "🧪 Running Playwright tests..."
+          
+          test_count=0
+          failed_tests=0
+          
+          for test_file in $(find tests_pages -type f -name "test_*.py" | sort); do
+              test_count=$((test_count + 1))
+              echo "================================================"
+              echo "📝 Test $test_count: $(basename $test_file)"
+              echo "================================================"
+              
+              if pytest "$test_file" \
+                  --browser ${{ matrix.browser }} \
+                  --alluredir=allure-results \

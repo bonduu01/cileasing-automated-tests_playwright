@@ -25,7 +25,11 @@ jobs:
   test:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 10
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     strategy:
       matrix:

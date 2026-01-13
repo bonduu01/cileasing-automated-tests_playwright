@@ -325,6 +325,7 @@ jobs:
         if: always()
         run: |
           touch allure-report/.nojekyll
+          cp -rf ./nojekyll allure-report/
           echo "✅ Created .nojekyll file in allure-report/"
 
       - name: 📦 Create Report Archive

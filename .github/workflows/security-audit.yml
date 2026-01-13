@@ -138,7 +138,7 @@ jobs:
           npm outdated || true
 
       - name: 🔍 Run Snyk Security Scan (Optional)
-        if: steps.check-package.outputs.exists == 'true' && secrets.SNYK_TOKEN != ''
+        if: steps.check-package.outputs.exists == 'true'
         uses: snyk/actions/node@master
         continue-on-error: true
         env:

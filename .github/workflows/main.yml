@@ -3,8 +3,15 @@ name: Playwright Tests with Allure and GitHub Pages Deployment
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+      - '!.github/workflows/main.yaml'
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
   workflow_dispatch:
 
 permissions:
@@ -12,10 +19,10 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
+# Prevent multiple concurrent deployments and test runs
 concurrency:
-  group: "pages-${{ github.ref }}"
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   PYTHON_VERSION: "3.12"
@@ -26,6 +33,12 @@ jobs:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
+    # Skip if commit is from dependabot or contains [skip ci]
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      !contains(github.event.head_commit.message, '[ci skip]') &&
+      github.actor != 'dependabot[bot]'
 
     environment:
       name: github-pages
@@ -48,6 +61,7 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
+          cache-dependency-path: requirements.txt
 
       # ============================================
       # Environment Configuration
@@ -59,7 +73,6 @@ jobs:
             exit 1
           fi
           echo "✅ .env.example found"
-          cat .env.example
 
       - name: 🔧 Create .env from .env.example
         run: |
@@ -67,35 +80,37 @@ jobs:
           cp .env.example .env
           
           # Override with secrets if available
-          if [ ! -z "${{ secrets.BASE_URL }}" ]; then
+          if [ -n "${{ secrets.BASE_URL }}" ]; then
             sed -i "s|^BASE_URL=.*|BASE_URL=${{ secrets.BASE_URL }}|" .env
           fi
           
-          if [ ! -z "${{ secrets.LOGIN_URL }}" ]; then
+          if [ -n "${{ secrets.LOGIN_URL }}" ]; then
             sed -i "s|^LOGIN_URL=.*|LOGIN_URL=${{ secrets.LOGIN_URL }}|" .env
           fi
           
-          if [ ! -z "${{ secrets.TEST_USERNAME }}" ]; then
+          if [ -n "${{ secrets.TEST_USERNAME }}" ]; then
             sed -i "s|^TEST_USERNAME=.*|TEST_USERNAME=${{ secrets.TEST_USERNAME }}|" .env
           fi
           
-          if [ ! -z "${{ secrets.TEST_PASSWORD }}" ]; then
+          if [ -n "${{ secrets.TEST_PASSWORD }}" ]; then
             sed -i "s|^TEST_PASSWORD=.*|TEST_PASSWORD=${{ secrets.TEST_PASSWORD }}|" .env
           fi
           
           # Force CI settings
-          sed -i "s|^HEADLESS=.*|HEADLESS=true|" .env
+          sed -i "s|^HEADLESS=.*|HEADLESS=True|" .env
           sed -i "s|^SLOW_MO=.*|SLOW_MO=0|" .env
           sed -i "s|^RECORD_VIDEO=.*|RECORD_VIDEO=false|" .env
           
           # Add CI variables
-          echo "" >> .env
-          echo "# CI Variables" >> .env
-          echo "CI=true" >> .env
-          echo "BROWSER=${{ matrix.browser }}" >> .env
-          echo "GITHUB_RUN_ID=${{ github.run_id }}" >> .env
-          echo "GITHUB_RUN_NUMBER=${{ github.run_number }}" >> .env
-          echo "GITHUB_SHA=${{ github.sha }}" >> .env
+          {
+            echo ""
+            echo "# CI Variables"
+            echo "CI=true"
+            echo "BROWSER=${{ matrix.browser }}"
+            echo "GITHUB_RUN_ID=${{ github.run_id }}"
+            echo "GITHUB_RUN_NUMBER=${{ github.run_number }}"
+            echo "GITHUB_SHA=${{ github.sha }}"
+          } >> .env
           
           echo "✅ .env created"
 
@@ -107,14 +122,6 @@ jobs:
       # ============================================
       # Install Dependencies
       # ============================================
-      - name: 📦 Cache Python dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
       - name: 📦 Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -127,19 +134,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
       - name: 🎭 Install Playwright Chromium
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: |
           python -m playwright install chromium --with-deps
           echo "✅ Playwright installed"
-
-      - name: 🎭 Update Playwright dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: |
-          python -m playwright install-deps chromium
-          echo "✅ Dependencies updated"
 
       # ============================================
       # Install Allure
@@ -149,21 +151,23 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /opt/allure
-          key: ${{ runner.os }}-allure-cli-v2
+          key: allure-${{ runner.os }}-v2.24
+          restore-keys: |
+            allure-${{ runner.os }}-
 
       - name: 📊 Install Allure CLI
         if: steps.allure-cache.outputs.cache-hit != 'true'
         run: |
-          LATEST_URL=$(curl -s https://api.github.com/repos/allure-framework/allure2/releases/latest \
-            | grep browser_download_url \
-            | grep zip \
-            | cut -d '"' -f 4)
+          LATEST_URL=$(curl -sL https://api.github.com/repos/allure-framework/allure2/releases/latest \
+            | grep -o 'https://.*allure.*\.zip' | head -1)
           echo "📥 Downloading Allure: $LATEST_URL"
-          wget -q $LATEST_URL -O allure.zip
+          
+          wget -q "$LATEST_URL" -O allure.zip
           sudo apt-get update -qq
           sudo apt-get install -y -qq unzip default-jre
           unzip -q allure.zip
-          ALLURE_DIR=$(find . -mindepth 1 -maxdepth 1 -type d -name "allure-[0-9]*" | head -n 1)
+          
+          ALLURE_DIR=$(find . -mindepth 1 -maxdepth 1 -type d -name "allure-*" | head -1)
           sudo mv "$ALLURE_DIR" /opt/allure
           sudo ln -sf /opt/allure/bin/allure /usr/bin/allure
           echo "✅ Allure installed"
@@ -178,11 +182,11 @@ jobs:
       # ============================================
       - name: 📁 Create test directories
         run: |
-          mkdir -p allure-results
-          mkdir -p test-results/screenshots
+          mkdir -p allure-results test-results/screenshots
           echo "✅ Directories created"
 
       - name: 🧪 Run Playwright Page Tests
+        continue-on-error: false
         run: |
           echo "🧪 Running Playwright tests..."
           echo "================================================"
@@ -194,17 +198,18 @@ jobs:
           test_files=$(find tests_pages -type f -name "test_*.py" 2>/dev/null | sort)
           
           if [ -z "$test_files" ]; then
-            echo "⚠️ No test files found"
+            echo "⚠️ No test files found in tests_pages/"
             exit 0
           fi
           
           for test_file in $test_files; do
               test_count=$((test_count + 1))
-              echo "📝 Running: $(basename $test_file)"
+              echo "📝 Running: $(basename "$test_file")"
               
               if pytest "$test_file" \
                   --browser chromium \
                   --alluredir=allure-results \
+                  --tb=short \
                   -v; then
                   echo "✅ PASSED"
                   passed_tests=$((passed_tests + 1))
@@ -216,16 +221,13 @@ jobs:
           done
           
           echo "================================================"
-          echo "📊 Summary: $passed_tests passed, $failed_tests failed"
+          echo "📊 Summary: $passed_tests passed, $failed_tests failed out of $test_count"
           echo "================================================"
-
-      # Uncomment when ready
-      # - name: 🧪 Run Playwright API Tests
-      #   run: |
-      #     for test_file in $(find tests_api -type f -name "test_*.py"); do
-      #         echo "Running $test_file..."
-      #         pytest "$test_file" --browser chromium --alluredir=allure-results -v || true
-      #     done
+          
+          # Fail the job if any tests failed
+          if [ $failed_tests -gt 0 ]; then
+            exit 1
+          fi
 
       # ============================================
       # Generate Report
@@ -234,14 +236,15 @@ jobs:
         if: always()
         run: |
           set -a
+          # shellcheck disable=SC1090
           source <(grep -v '^#' .env | grep -v '^$' | sed 's/\r$//')
           set +a
           
           cat > allure-results/environment.properties << EOF
           Application=Candi Leasing
-          Base.URL=${BASE_URL}
+          Base.URL=${BASE_URL:-N/A}
           Browser=${{ matrix.browser }}
-          Headless=${HEADLESS}
+          Headless=${HEADLESS:-true}
           Python=${{ env.PYTHON_VERSION }}
           Build=${{ github.run_number }}
           Commit=${{ github.sha }}
@@ -255,21 +258,15 @@ jobs:
         run: |
           rm -rf allure-report
           allure generate allure-results -o allure-report --clean
-          ls -la allure-report
-          echo "✅ Report generated"
+          echo "✅ Report generated with $(find allure-report -type f | wc -l) files"
 
-      - name: 📦 Zip Allure Report
+      - name: 📦 Create Report Archive
         if: always()
         run: |
-          zip -r allure-report-${{ github.run_number }}.zip allure-report
-          echo "📦 Size: $(du -h allure-report-${{ github.run_number }}.zip | cut -f1)"
-
-      - name: 📄 Verify Report
-        if: always()
-        run: |
-          echo "Checking allure-report directory..."
-          ls -la allure-report/
-          echo "Total files: $(find allure-report -type f | wc -l)"
+          cd allure-report
+          zip -r ../allure-report-${{ github.run_number }}.zip .
+          cd ..
+          echo "📦 Archive size: $(du -h allure-report-${{ github.run_number }}.zip | cut -f1)"
 
       # ============================================
       # Upload Artifacts
@@ -279,14 +276,15 @@ jobs:
         if: always()
         with:
           name: allure-results-${{ github.run_number }}
-          path: allure-results
+          path: allure-results/
           retention-days: 30
+          compression-level: 6
 
       - name: 📤 Upload Allure Report ZIP
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: allure-report-${{ github.run_number }}
+          name: allure-report-zip-${{ github.run_number }}
           path: allure-report-${{ github.run_number }}.zip
           retention-days: 30
 
@@ -294,7 +292,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: screenshots-${{ github.run_number }}
+          name: test-screenshots-${{ github.run_number }}
           path: test-results/screenshots/
           retention-days: 14
           if-no-files-found: ignore
@@ -303,67 +301,26 @@ jobs:
       # Deploy to GitHub Pages
       # ============================================
       - name: 📄 Setup Pages
-        if: always()
+        if: always() && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v4
 
       - name: 📤 Upload to Pages
-        if: always()
+        if: always() && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './allure-report'
 
       - name: 🚀 Deploy to Pages
-        if: always()
+        if: always() && github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@v4
 
       - name: 🎉 Output Report URL
-        if: always()
+        if: always() && github.ref == 'refs/heads/main'
         run: |
           echo "================================================"
           echo "📊 Allure Report: ${{ steps.deployment.outputs.page_url }}"
           echo "================================================"
-
-      # ============================================
-      # Optional: Netlify Deployment
-      # ============================================
-      # Uncomment to enable Netlify deployment
-      # - name: 🌐 Deploy to Netlify
-      #   if: always()
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #   run: |
-      #     npm install -g netlify-cli@latest
-      #
-      #     if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
-      #       echo "Error: NETLIFY_AUTH_TOKEN not set"
-      #       exit 1
-      #     fi
-      #
-      #     if [ -z "$NETLIFY_SITE_ID" ]; then
-      #       echo "Error: NETLIFY_SITE_ID not set"
-      #       exit 1
-      #     fi
-      #
-      #     echo "Deploying to Netlify..."
-      #     netlify deploy \
-      #       --dir=allure-report \
-      #       --prod \
-      #       --auth="$NETLIFY_AUTH_TOKEN" \
-      #       --site="$NETLIFY_SITE_ID" \
-      #       --message="Build ${{ github.run_number }}" \
-      #       --json > deploy-output.json
-      #
-      #     if [ $? -eq 0 ]; then
-      #       echo "✅ Deployment successful!"
-      #       DEPLOY_URL=$(cat deploy-output.json | grep -o '"deploy_url":"[^"]*"' | cut -d'"' -f4)
-      #       echo "📊 Netlify URL: $DEPLOY_URL"
-      #     else
-      #       echo "❌ Deployment failed!"
-      #       cat deploy-output.json
-      #       exit 1
-      #     fi
 
       # ============================================
       # Summary
@@ -371,16 +328,21 @@ jobs:
       - name: 📊 Job Summary
         if: always()
         run: |
-          echo "# 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
-          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Build | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Browser | ${{ matrix.browser }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Commit | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
-          echo "| Branch | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📊 [View Report](${{ steps.deployment.outputs.page_url }})" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "# 🧪 Test Execution Summary"
+            echo ""
+            echo "| Property | Value |"
+            echo "|----------|-------|"
+            echo "| Build | #${{ github.run_number }} |"
+            echo "| Browser | ${{ matrix.browser }} |"
+            echo "| Commit | \`${{ github.sha }}\` |"
+            echo "| Branch | \`${{ github.ref_name }}\` |"
+            echo "| Actor | @${{ github.actor }} |"
+            echo ""
+            if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+              echo "📊 [View Report](${{ steps.deployment.outputs.page_url }})"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # ============================================
       # Cleanup

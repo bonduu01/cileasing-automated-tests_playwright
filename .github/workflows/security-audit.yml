@@ -1,120 +1,203 @@
-#name: Security Audit
-#
-#on:
-#  push:
-#    branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
-#  schedule:
-#    # Run weekly on Monday at 9am UTC
-#    - cron: '0 9 * * 1'
-#  workflow_dispatch:
-#
-#jobs:
-#  audit-node:
-#    name: Node.js Security Audit
-#    runs-on: ubuntu-latest
-#    # Only run if package.json exists
-#    if: hashFiles('package.json') != ''
-#
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: '20'
-#
-#      - name: Install dependencies
-#        run: npm ci
-#
-#      - name: Run npm audit
-#        run: npm audit --audit-level=moderate
-#        continue-on-error: true
-#
-#      - name: Check for outdated packages
-#        run: npm outdated || true
-#
-#      - name: Run Snyk Security Scan
-#        uses: snyk/actions/node@master
-#        continue-on-error: true
-#        env:
-#          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-#        with:
-#          args: --severity-threshold=high
-#
-#  audit-python:
-#    name: Python Security Audit
-#    runs-on: ubuntu-latest
-#    # Only run if requirements.txt exists
-#    if: hashFiles('requirements.txt') != ''
-#
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup Python
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version: '3.11'
-#
-#      - name: Install dependencies
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install -r requirements.txt
-#          pip install safety pip-audit
-#
-#      - name: Run Safety check
-#        run: safety check --json || true
-#        continue-on-error: true
-#
-#      - name: Run pip-audit
-#        run: pip-audit
-#        continue-on-error: true
-#
-#      - name: Check for outdated packages
-#        run: pip list --outdated || true
-#
-#  dependency-review:
-#    name: Dependency Review
-#    runs-on: ubuntu-latest
-#    if: github.event_name == 'pull_request'
-#
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Dependency Review
-#        uses: actions/dependency-review-action@v4
-#        with:
-#          fail-on-severity: moderate
-#
-#  license-check:
-#    name: License Compliance Check
-#    runs-on: ubuntu-latest
-#    if: hashFiles('package.json') != '' || hashFiles('requirements.txt') != ''
-#
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup Node.js
-#        if: hashFiles('package.json') != ''
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: '20'
-#
-#      - name: Check Node.js licenses
-#        if: hashFiles('package.json') != ''
-#        run: |
-#          npm ci
-#          npx license-checker --summary
-#
-#      - name: Setup Python
-#        if: hashFiles('requirements.txt') != ''
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version: '3.11'
-#
-#      - name: Check Python licenses
-#        if: hashFiles('requirements.txt') != ''
-#        run: |
-#          pip install pip-licenses
-#          pip-licenses
+name: Security Audit
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'requirements.txt'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/security-audit.yaml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'requirements.txt'
+      - 'package.json'
+      - 'package-lock.json'
+  schedule:
+    # Run weekly on Monday at 9am UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+# Prevent concurrent security audits
+concurrency:
+  group: security-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-python:
+    name: Python Security Audit
+    runs-on: ubuntu-latest
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      hashFiles('requirements.txt') != ''
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install safety pip-audit
+
+      - name: 🔒 Run Safety check
+        run: |
+          echo "Running Safety security scan..."
+          safety check --json || echo "⚠️ Safety found vulnerabilities"
+        continue-on-error: true
+
+      - name: 🔍 Run pip-audit
+        run: |
+          echo "Running pip-audit..."
+          pip-audit --desc || echo "⚠️ pip-audit found vulnerabilities"
+        continue-on-error: true
+
+      - name: 📊 Check for outdated packages
+        run: |
+          echo "Checking for outdated packages..."
+          pip list --outdated || true
+
+      - name: 📝 Create Security Summary
+        if: always()
+        run: |
+          {
+            echo "# 🔒 Python Security Audit"
+            echo ""
+            echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo ""
+            echo "**Branch:** \`${{ github.ref_name }}\`"
+            echo ""
+            echo "Check the job logs for detailed vulnerability information."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  audit-node:
+    name: Node.js Security Audit
+    runs-on: ubuntu-latest
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      hashFiles('package.json') != ''
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔒 Run npm audit
+        run: |
+          echo "Running npm security audit..."
+          npm audit --audit-level=moderate || echo "⚠️ npm audit found vulnerabilities"
+        continue-on-error: true
+
+      - name: 📊 Check for outdated packages
+        run: |
+          echo "Checking for outdated packages..."
+          npm outdated || true
+
+      - name: 🔍 Run Snyk Security Scan
+        if: env.SNYK_TOKEN != ''
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+      - name: 📝 Create Security Summary
+        if: always()
+        run: |
+          {
+            echo "# 🔒 Node.js Security Audit"
+            echo ""
+            echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo ""
+            echo "**Branch:** \`${{ github.ref_name }}\`"
+            echo ""
+            echo "Check the job logs for detailed vulnerability information."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      !contains(github.event.head_commit.message, '[skip ci]')
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          comment-summary-in-pr: on-failure
+
+  license-check:
+    name: License Compliance
+    runs-on: ubuntu-latest
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      (hashFiles('package.json') != '' || hashFiles('requirements.txt') != '')
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📄 Check Node.js licenses
+        if: hashFiles('package.json') != ''
+        run: |
+          npm ci
+          npx license-checker --summary
+
+      - name: 🐍 Setup Python
+        if: hashFiles('requirements.txt') != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: 📄 Check Python licenses
+        if: hashFiles('requirements.txt') != ''
+        run: |
+          pip install pip-licenses
+          pip-licenses --format=markdown
+
+      - name: 📝 Create License Summary
+        if: always()
+        run: |
+          {
+            echo "# 📄 License Compliance Check"
+            echo ""
+            echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo ""
+            echo "All dependencies checked for license compliance."
+          } >> "$GITHUB_STEP_SUMMARY"

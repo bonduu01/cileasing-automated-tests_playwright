@@ -6,11 +6,11 @@ on:
     paths-ignore:
       - '**.md'
       - 'docs/**'
-#  pull_request:
-#    branches: [ main ]
-#    paths-ignore:
-#      - '**.md'
-#      - 'docs/**'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
@@ -329,17 +329,34 @@ jobs:
       # ============================================
       # Deploy to GitHub Pages
       # ============================================
+      - name: 📄 Verify report before deployment
+        if: always() && github.ref == 'refs/heads/main'
+        run: |
+          if [ ! -d "allure-report" ]; then
+            echo "❌ allure-report directory not found!"
+            exit 1
+          fi
+          
+          if [ ! -f "allure-report/index.html" ]; then
+            echo "❌ allure-report/index.html not found!"
+            exit 1
+          fi
+          
+          echo "✅ Report directory verified"
+          echo "📁 Contents:"
+          ls -la allure-report/ | head -20
+
       - name: 📄 Setup Pages
         if: always() && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v4
 
-      - name: 📤 Upload to Pages
+      - name: 📤 Upload artifact to Pages
         if: always() && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './allure-report'
 
-      - name: 🚀 Deploy to Pages
+      - name: 🚀 Deploy to GitHub Pages
         if: always() && github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@v4

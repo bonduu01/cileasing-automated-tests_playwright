@@ -1,54 +1,54 @@
-version: 2
-updates:
-  # Enable version updates for npm (if using Node.js)
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
-    # Group all non-security updates together
-    groups:
-      dependencies:
-        patterns:
-          - "*"
-        exclude-patterns:
-          - "*security*"
-    # Security updates will still be created individually
-    allow:
-      - dependency-type: "all"
-    commit-message:
-      prefix: "deps"
-      include: "scope"
-    labels:
-      - "dependencies"
-      - "automated"
-
-  # Enable version updates for pip (if using Python)
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
-    groups:
-      dependencies:
-        patterns:
-          - "*"
-        exclude-patterns:
-          - "*security*"
-    commit-message:
-      prefix: "deps"
-      include: "scope"
-    labels:
-      - "dependencies"
-      - "automated"
-
-  # GitHub Actions updates
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    commit-message:
-      prefix: "ci"
-    labels:
-      - "ci"
-      - "automated"
+#version: 2
+#updates:
+#  # Enable version updates for npm (if using Node.js)
+#  - package-ecosystem: "npm"
+#    directory: "/"
+#    schedule:
+#      interval: "weekly"
+#    open-pull-requests-limit: 10
+#    # Group all non-security updates together
+#    groups:
+#      dependencies:
+#        patterns:
+#          - "*"
+#        exclude-patterns:
+#          - "*security*"
+#    # Security updates will still be created individually
+#    allow:
+#      - dependency-type: "all"
+#    commit-message:
+#      prefix: "deps"
+#      include: "scope"
+#    labels:
+#      - "dependencies"
+#      - "automated"
+#
+#  # Enable version updates for pip (if using Python)
+#  - package-ecosystem: "pip"
+#    directory: "/"
+#    schedule:
+#      interval: "weekly"
+#    open-pull-requests-limit: 10
+#    groups:
+#      dependencies:
+#        patterns:
+#          - "*"
+#        exclude-patterns:
+#          - "*security*"
+#    commit-message:
+#      prefix: "deps"
+#      include: "scope"
+#    labels:
+#      - "dependencies"
+#      - "automated"
+#
+#  # GitHub Actions updates
+#  - package-ecosystem: "github-actions"
+#    directory: "/"
+#    schedule:
+#      interval: "monthly"
+#    commit-message:
+#      prefix: "ci"
+#    labels:
+#      - "ci"
+#      - "automated"

@@ -6,6 +6,10 @@ on:
     paths-ignore:
       - '**.md'
       - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - '.github/**'
+      - '!.github/workflows/main.yaml'
   workflow_dispatch:
 
 permissions:
@@ -161,9 +165,16 @@ jobs:
           sudo ln -sf /opt/allure/bin/allure /usr/bin/allure
           echo "✅ Allure installed"
 
+      - name: 📊 Setup Allure PATH (if cached)
+        if: steps.allure-cache.outputs.cache-hit == 'true'
+        run: |
+          sudo ln -sf /opt/allure/bin/allure /usr/bin/allure
+          echo "✅ Allure symlink restored from cache"
+
       - name: 📊 Verify Allure installation
         run: |
           allure --version
+          which allure
           echo "✅ Allure ready"
 
       # ============================================
@@ -236,6 +247,9 @@ jobs:
       - name: 📊 Add environment info
         if: always()
         run: |
+          # Ensure allure-results directory exists
+          mkdir -p allure-results
+          
           # Source environment variables
           if [ -f .env ]; then
             set -a

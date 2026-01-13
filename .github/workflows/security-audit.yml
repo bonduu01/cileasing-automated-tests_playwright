@@ -28,15 +28,25 @@ jobs:
   audit-python:
     name: Python Security Audit
     runs-on: ubuntu-latest
-    if: |
-      !contains(github.event.head_commit.message, '[skip ci]') &&
-      hashFiles('requirements.txt') != ''
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
 
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      - name: ✅ Check if requirements.txt exists
+        id: check-requirements
+        run: |
+          if [ -f "requirements.txt" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "✅ requirements.txt found"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "⚠️ requirements.txt not found - skipping Python audit"
+          fi
+
       - name: 🐍 Setup Python
+        if: steps.check-requirements.outputs.exists == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -44,30 +54,34 @@ jobs:
           cache-dependency-path: requirements.txt
 
       - name: 📦 Install dependencies
+        if: steps.check-requirements.outputs.exists == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install safety pip-audit
 
       - name: 🔒 Run Safety check
+        if: steps.check-requirements.outputs.exists == 'true'
         run: |
           echo "Running Safety security scan..."
           safety check --json || echo "⚠️ Safety found vulnerabilities"
         continue-on-error: true
 
       - name: 🔍 Run pip-audit
+        if: steps.check-requirements.outputs.exists == 'true'
         run: |
           echo "Running pip-audit..."
           pip-audit --desc || echo "⚠️ pip-audit found vulnerabilities"
         continue-on-error: true
 
       - name: 📊 Check for outdated packages
+        if: steps.check-requirements.outputs.exists == 'true'
         run: |
           echo "Checking for outdated packages..."
           pip list --outdated || true
 
       - name: 📝 Create Security Summary
-        if: always()
+        if: always() && steps.check-requirements.outputs.exists == 'true'
         run: |
           {
             echo "# 🔒 Python Security Audit"
@@ -82,36 +96,49 @@ jobs:
   audit-node:
     name: Node.js Security Audit
     runs-on: ubuntu-latest
-    if: |
-      !contains(github.event.head_commit.message, '[skip ci]') &&
-      hashFiles('package.json') != ''
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
 
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      - name: ✅ Check if package.json exists
+        id: check-package
+        run: |
+          if [ -f "package.json" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "✅ package.json found"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "⚠️ package.json not found - skipping Node.js audit"
+          fi
+
       - name: 📦 Setup Node.js
+        if: steps.check-package.outputs.exists == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
       - name: 📦 Install dependencies
+        if: steps.check-package.outputs.exists == 'true'
         run: npm ci
 
       - name: 🔒 Run npm audit
+        if: steps.check-package.outputs.exists == 'true'
         run: |
           echo "Running npm security audit..."
           npm audit --audit-level=moderate || echo "⚠️ npm audit found vulnerabilities"
         continue-on-error: true
 
       - name: 📊 Check for outdated packages
+        if: steps.check-package.outputs.exists == 'true'
         run: |
           echo "Checking for outdated packages..."
           npm outdated || true
 
-      - name: 🔍 Run Snyk Security Scan
-        if: env.SNYK_TOKEN != ''
+      - name: 🔍 Run Snyk Security Scan (Optional)
+        if: steps.check-package.outputs.exists == 'true' && secrets.SNYK_TOKEN != ''
         uses: snyk/actions/node@master
         continue-on-error: true
         env:
@@ -120,7 +147,7 @@ jobs:
           args: --severity-threshold=high
 
       - name: 📝 Create Security Summary
-        if: always()
+        if: always() && steps.check-package.outputs.exists == 'true'
         run: |
           {
             echo "# 🔒 Node.js Security Audit"
@@ -135,9 +162,7 @@ jobs:
   dependency-review:
     name: Dependency Review
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'pull_request' &&
-      !contains(github.event.head_commit.message, '[skip ci]')
+    if: ${{ github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '[skip ci]') }}
 
     permissions:
       contents: read
@@ -156,29 +181,50 @@ jobs:
   license-check:
     name: License Compliance
     runs-on: ubuntu-latest
-    if: |
-      !contains(github.event.head_commit.message, '[skip ci]') &&
-      (hashFiles('package.json') != '' || hashFiles('requirements.txt') != '')
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
 
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      - name: ✅ Check which files exist
+        id: check-files
+        run: |
+          HAS_PACKAGE=false
+          HAS_REQUIREMENTS=false
+          
+          if [ -f "package.json" ]; then
+            HAS_PACKAGE=true
+            echo "✅ package.json found"
+          fi
+          
+          if [ -f "requirements.txt" ]; then
+            HAS_REQUIREMENTS=true
+            echo "✅ requirements.txt found"
+          fi
+          
+          echo "has_package=$HAS_PACKAGE" >> $GITHUB_OUTPUT
+          echo "has_requirements=$HAS_REQUIREMENTS" >> $GITHUB_OUTPUT
+          
+          if [ "$HAS_PACKAGE" = false ] && [ "$HAS_REQUIREMENTS" = false ]; then
+            echo "⚠️ No package.json or requirements.txt found - skipping license check"
+          fi
+
       - name: 📦 Setup Node.js
-        if: hashFiles('package.json') != ''
+        if: steps.check-files.outputs.has_package == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
       - name: 📄 Check Node.js licenses
-        if: hashFiles('package.json') != ''
+        if: steps.check-files.outputs.has_package == 'true'
         run: |
           npm ci
           npx license-checker --summary
 
       - name: 🐍 Setup Python
-        if: hashFiles('requirements.txt') != ''
+        if: steps.check-files.outputs.has_requirements == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -186,13 +232,13 @@ jobs:
           cache-dependency-path: requirements.txt
 
       - name: 📄 Check Python licenses
-        if: hashFiles('requirements.txt') != ''
+        if: steps.check-files.outputs.has_requirements == 'true'
         run: |
           pip install pip-licenses
           pip-licenses --format=markdown
 
       - name: 📝 Create License Summary
-        if: always()
+        if: always() && (steps.check-files.outputs.has_package == 'true' || steps.check-files.outputs.has_requirements == 'true')
         run: |
           {
             echo "# 📄 License Compliance Check"

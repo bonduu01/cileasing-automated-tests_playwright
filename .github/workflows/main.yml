@@ -6,11 +6,11 @@ on:
     paths-ignore:
       - '**.md'
       - 'docs/**'
-  pull_request:
-    branches: [ main ]
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
+#  pull_request:
+#    branches: [ main ]
+#    paths-ignore:
+#      - '**.md'
+#      - 'docs/**'
   workflow_dispatch:
 
 permissions:
@@ -38,6 +38,11 @@ jobs:
       !contains(github.event.head_commit.message, '[skip ci]') &&
       !contains(github.event.head_commit.message, '[ci skip]') &&
       github.actor != 'dependabot[bot]'
+
+    # Required for GitHub Pages deployment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       # ============================================

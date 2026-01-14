@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     # Application URLs
     base_url: str = "https://candileasing.netlify.app/"
     login_url: str = "https://candileasing.netlify.app/"
+    self_service_url: str = "https://candileasing.netlify.app/personal/self-service"
 
     # Test Credentials
     test_username: str = ""

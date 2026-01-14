@@ -30,6 +30,9 @@ class TestUserLogins:
             password=settings.test_password
         )
         login_page.verify_login_successful_load_companies()
+        # Displays the Default Company
+        self_service_page = login_page.click_default_company_link()
+        self_service_page.wait(5000)
 
     @pytest.mark.smoke
     @pytest.mark.login

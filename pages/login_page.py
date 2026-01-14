@@ -4,6 +4,7 @@ Login Page Object for the CAndILeasing application.
 
 from playwright.sync_api import Page
 
+from pages.self_service_page import SelfServicePage
 from pages.base_page import BasePage
 from config import settings
 from utils.constants import LOGIN_PAGE
@@ -59,7 +60,7 @@ class LoginPage(BasePage):
 
     def verify_error_toast_visible(self):
         """Verify error toast alert is visible."""
-        self.verify_element_visible(LOGIN_PAGE.ERROR_TOAST, timeout=5000)
+        self.verify_element_visible(LOGIN_PAGE.ERROR_TOAST, timeout=1000)
 
     def verify_password_blank_error(self):
         """Verify 'Password cannot be blank' validation error."""
@@ -70,10 +71,6 @@ class LoginPage(BasePage):
         self.verify_validation_error(LOGIN_PAGE.ERROR_USERNAME_BLANK)
         self.verify_validation_error(LOGIN_PAGE.ERROR_PASSWORD_BLANK)
 
-    def verify_validation_error_by_text(self, error_text: str):
-        """Verify validation error with specific text."""
-        self.verify_field_error_by_text(error_text)
-
     def is_password_blank_error_visible(self):
         """Check if password blank error is visible."""
         return self.is_validation_error_visible(LOGIN_PAGE.ERROR_PASSWORD_BLANK)
@@ -82,10 +79,19 @@ class LoginPage(BasePage):
         """Check if password blank error is visible."""
         return self.is_validation_error_visible(LOGIN_PAGE.ERROR_USERNAME_BLANK)
 
-    def get_validation_error_message(self):
-        """Get validation error message text."""
-        return self.get_validation_error_text(LOGIN_PAGE.VALIDATION_ERROR)
+    def click_default_company_link(self) -> SelfServicePage:
+        """Click the default company link."""
+        self.click_element(LOGIN_PAGE.DEFAULT_LINK)
+        return SelfServicePage(self.page)
 
-    def wait_for_password_blank_error(self, timeout: float = 5000):
-        """Wait for password blank error to appear."""
-        return self.wait_for_validation_error(LOGIN_PAGE.ERROR_PASSWORD_BLANK, timeout)
+    # def get_validation_error_message(self):
+    #     """Get validation error message text."""
+    #     return self.get_validation_error_text(LOGIN_PAGE.VALIDATION_ERROR)
+    #
+    # def wait_for_password_blank_error(self, timeout: float = 5000):
+    #     """Wait for password blank error to appear."""
+    #     return self.wait_for_validation_error(LOGIN_PAGE.ERROR_PASSWORD_BLANK, timeout)
+    #
+    # def verify_validation_error_by_text(self, error_text: str):
+    #     """Verify validation error with specific text."""
+    #     self.verify_field_error_by_text(error_text)

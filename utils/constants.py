@@ -27,6 +27,7 @@ class LoginPageSelectors:
     ERROR_PASSWORD_BLANK = "Password cannot be blank"
     ERROR_USERNAME_BLANK = "Email cannot be blank"
     ERROR_INVALID_CREDENTIALS = "Invalid username or password"
+    DEFAULT_LINK: str = 'text="DEFAULT"'
 
 
 # Create singleton instances

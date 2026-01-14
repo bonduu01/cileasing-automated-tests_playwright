@@ -137,7 +137,10 @@ jobs:
         continue-on-error: true
         run: |
           echo "🧪 Running tests..."
-          pytest tests_pages/ --alluredir=allure-results --verbose || true
+          for test_file in $(find tests_pages -type f -name "test_*.py"); do
+              echo "Running $test_file..."
+              pytest "$test_file" --browser chromium --alluredir=allure-results -v
+          done
           echo "✅ Tests completed"
 
       # ============================================
@@ -164,11 +167,27 @@ jobs:
           # Generate report
           allure generate allure-results -o allure-report --clean
           
-          # CRITICAL: Add .nojekyll to prevent Jekyll processing
-          touch allure-report/.nojekyll
-          cp -rf ./.nojekyll allure-report
-          
           echo "✅ Report generated: $(find allure-report -type f | wc -l) files"
+
+      - name: 📄 Copy .nojekyll to report directory
+        if: always()
+        run: |
+          if [ -f .nojekyll ]; then
+            cp .nojekyll allure-report/.nojekyll
+            echo "✅ Copied .nojekyll from root to allure-report/"
+          else
+            touch allure-report/.nojekyll
+            echo "⚠️ .nojekyll not found in root, created new one in allure-report/"
+          fi
+          
+          # Verify it was copied
+          if [ -f allure-report/.nojekyll ]; then
+            echo "✅ Verified: .nojekyll exists in allure-report/"
+            ls -la allure-report/ | grep nojekyll
+          else
+            echo "❌ ERROR: .nojekyll still missing in allure-report/"
+            exit 1
+          fi
 
       # ============================================
       # Upload Artifacts

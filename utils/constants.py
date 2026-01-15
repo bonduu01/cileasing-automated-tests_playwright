@@ -19,7 +19,8 @@ class LoginPageSelectors:
     PASSWORD_INPUT: str = 'input[name="password"]'
     SUBMIT_BUTTON: str = 'button[type="submit"][buttontype="primary"]'
     PASSWORD_DISABLED: str = "input[name='password'][type='password']"
-    DEFAULT_COMPANY: str = 'div.space-y-4 div.uppercase:text-is("DEFAULT")'
+    # DEFAULT_COMPANY: str = 'div.space-y-4 div.uppercase:text-is("DEFAULT")'
+    DEFAULT_COMPANY: str = "div.uppercase:has-text('DEFAULT')"
     FLOUR_MILLS_COMPANY: str = 'div.space-y-4 div.uppercase:text-is("FLOUR MILLS NIGERIA LIMITED GOLDEN NOODLES & PASTA IGANMU")'
     ERROR_TOAST: str = 'div[role="alert"]'
     PASSWORD_BLANK_ERROR = 'p.text-xs.mt-1:has-text("Password cannot be blank")'
@@ -38,6 +39,7 @@ class SelfServicePageSelectors:
     LOGOUT_LINK: str = "p.text-danger:has-text('Logout')"
     EDIT_LINK: str = "button:has-text('Edit')"
     EDIT_SUBMIT_BUTTON: str = "button:has-text('Submit')"
+    ADD_BANK_DETAIL_BUTTON: str = "button:has-text('Bank Details')"
 
 
 @dataclass(frozen=True)
@@ -46,6 +48,7 @@ class EditSelfServicePageSelectors:
     OTHER_NAME: str = "input[name='otherName']"
     JOB_TITLE: str = 'input[name="jobTitle"]'
     EDIT_SUBMIT_BUTTON: str = "button:has-text('Submit')"
+
 
 
 # Create singleton instances

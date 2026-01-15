@@ -1,13 +1,14 @@
 import pytest
-from pages import EditSelfServicePage, SelfServicePage
 from playwright.sync_api import Page
 from config import settings
 import logging
 
+from pages import SelfServicePage
+
 logger = logging.getLogger(__name__)
 
 
-class TestEditSelfServicePage:
+class TestAddBankDetailsPage:
     """Test suite for Self-Service functionalities."""
 
     @pytest.fixture(autouse=True)
@@ -35,9 +36,9 @@ class TestEditSelfServicePage:
         # Cleanup if needed
 
     @pytest.mark.regression
-    def test_edit_personal_details(self) -> None:
+    def test_to_add_bank_details(self) -> None:
         """Test editing personal details with debugging"""
-        logger.info("📋 Test go to Edit Personal Details")
+        logger.info("📋 Test go add bank Details")
         # Debug: Check current page
         logger.info(f"📍 Current URL: {self.page.url}")
         logger.info(f"📍 Page Title: {self.page.title()}")
@@ -48,18 +49,18 @@ class TestEditSelfServicePage:
         # # Take screenshot before clicking
         # self.page.screenshot(path="before_click_edit.png", full_page=True)
 
-        # Debug: Check if edit link is visible
+        # Debug: Check if Add Bank Button is visible
         from utils.constants import SELF_SERVICE_PAGE
-        edit_link = self.page.locator(SELF_SERVICE_PAGE.EDIT_LINK)
+        add_bank_detail_button = self.page.locator(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_BUTTON)
 
-        logger.info(f"🔍 Edit link visible: {edit_link.is_visible()}")
-        logger.info(f"🔍 Edit link count: {edit_link.count()}")
+        logger.info(f"🔍 Add Bank Button visible: {add_bank_detail_button.is_visible()}")
+        logger.info(f"🔍 Add Bank Button count: {add_bank_detail_button.count()}")
 
-        if edit_link.count() > 0:
-            logger.info(f"🔍 Edit link text: {edit_link.text_content()}")
+        if add_bank_detail_button.count() > 0:
+            logger.info(f"🔍 Add Bank Button text: {add_bank_detail_button.text_content()}")
 
-        # Click to edit
-        self.edit_self_service_page = self.self_service_page.click_to_edit_personal_data_details()
+        # Click to add
+        self.add_bank_details_page = self.self_service_page.click_to_add_banking_details()
 
         # Debug: Check navigation happened
         logger.info(f"📍 After click URL: {self.page.url}")
@@ -67,9 +68,9 @@ class TestEditSelfServicePage:
         # # Take screenshot after clicking
         # self.page.screenshot(path="after_click_edit.png", full_page=True)
 
-        # Fill Form
-        self.edit_self_service_page.edit_and_submit_personal_data_details(
-            other_name=settings.test_other_name,
-            job_title=settings.test_job_title
-        )
-        logger.info("✅ Edit action successful")
+        # Create bank details
+
+        # self.edit_self_service_page.edit_and_submit_personal_data_details(
+        #     other_name=settings.test_other_name,
+        #     job_title=settings.test_job_title
+        # )

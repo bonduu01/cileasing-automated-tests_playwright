@@ -26,13 +26,7 @@ class LoginPage(BasePage):
 
     @log_method
     def login_user(self, email: str | None = None, password: str | None = None) -> None:
-        """
-        Perform login with provided or default credentials.
-
-        Args:
-            email: User email (defaults to TEST_USERNAME from .env)
-            password: User password (defaults to TEST_PASSWORD from .env)
-        """
+        """ Perform login with provided or default credentials."""
         email = email or settings.test_username
         password = password or settings.test_password
 

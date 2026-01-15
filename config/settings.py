@@ -19,9 +19,10 @@ class Settings(BaseSettings):
 
     # Application URLs
     base_url: str = "https://candileasing.netlify.app/"
-    login_url: str = "https://candileasing.netlify.app/"
-    self_service_url: str = "https://candileasing.netlify.app/personal/self-service"
-    edit_self_service_url: str = "https://candileasing.netlify.app/personal/self-service/personal-data/edit"
+    login_url: str = f"{base_url}"
+    self_service_url: str = f"{base_url}personal/self-service"
+    edit_self_service_url: str = f"{base_url}personal/self-service/personal-data/edit"
+    add_bank_details_url: str = f"{base_url}personal/self-service/bank-details/add"
 
 
     # Test Credentials

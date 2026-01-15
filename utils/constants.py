@@ -36,9 +36,7 @@ class SelfServicePageSelectors:
     PERSONAL_NAME: str = "span.text-dark0b.font-\\[400\\].text-\\[14px\\]"
     MM_PROFILE: str = "span.ant-avatar-string:has-text('MM')"
     LOGOUT_LINK: str = "p.text-danger:has-text('Logout')"
-    EDIT_LINK: str = "div.flex.items-center:has-text('Edit')"
-    OTHER_NAME: str = "input[name='otherName']"
-    JOB_TITLE: str = 'input[name="jobTitle"]'
+    EDIT_LINK: str = "button:has-text('Edit')"
     EDIT_SUBMIT_BUTTON: str = "button:has-text('Submit')"
 
 

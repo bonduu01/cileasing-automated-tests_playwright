@@ -51,26 +51,17 @@ class TestAddBankDetailsPage:
 
         # Debug: Check if Add Bank Button is visible
         from utils.constants import SELF_SERVICE_PAGE
-        add_bank_detail_button = self.page.locator(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_BUTTON)
+        add_bank_detail_module_link = self.page.locator(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_MODULE)
 
-        logger.info(f"🔍 Add Bank Button visible: {add_bank_detail_button.is_visible()}")
-        logger.info(f"🔍 Add Bank Button count: {add_bank_detail_button.count()}")
+        logger.info(f"🔍 Add Bank Button visible: {add_bank_detail_module_link.is_visible()}")
+        logger.info(f"🔍 Add Bank Button count: {add_bank_detail_module_link.count()}")
 
-        if add_bank_detail_button.count() > 0:
-            logger.info(f"🔍 Add Bank Button text: {add_bank_detail_button.text_content()}")
+        if add_bank_detail_module_link.count() > 0:
+            logger.info(f"🔍 Add Bank Button text: {add_bank_detail_module_link.text_content()}")
 
         # Click to add
         self.add_bank_details_page = self.self_service_page.click_to_add_banking_details()
 
         # Debug: Check navigation happened
         logger.info(f"📍 After click URL: {self.page.url}")
-
-        # # Take screenshot after clicking
-        # self.page.screenshot(path="after_click_edit.png", full_page=True)
-
-        # Create bank details
-
-        # self.edit_self_service_page.edit_and_submit_personal_data_details(
-        #     other_name=settings.test_other_name,
-        #     job_title=settings.test_job_title
-        # )
+        self.add_bank_details_page.create_new_bank_details()

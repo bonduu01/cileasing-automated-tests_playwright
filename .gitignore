@@ -24,7 +24,6 @@ report.html
 allure-results/
 allure-report/
 videos/
-screenshots/
 traces/
 
 # IDEs
@@ -53,3 +52,7 @@ logs/
 
 # Ruff
 .ruff_cache/
+
+# Pictures
+./screenshots
+*.png

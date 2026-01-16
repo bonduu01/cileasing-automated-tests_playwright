@@ -108,21 +108,53 @@ class SelfServicePage(BasePage):
             logger.info("🖱️ Click a button to add Bank Details")
             # Wait for the page to be fully loaded
             self.page.wait_for_load_state("domcontentloaded")
-            self.click_element(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_BUTTON)
-            logger.info("✅ Add Details link clicked successfully")
+            self.click_element(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_MODULE)
+            logger.info("✅ Click Bank Details link")
+
+            self.click_element(SELF_SERVICE_PAGE.ADD_NEW_BANK_DETAIL_BUTTON)
+
+            logger.info("✅ Click Add Bank Details link")
+            logger.info("✅ Navigate to Add Bank Details Page")
             return AddBankDetailsPage(self.page)
 
         except Exception as e:
             logger.error(f"❌ Failed to add bank detail : {e}")
             # Debug info
-            self._debug_add_bank_detail()
+            self._debug_add_bank_module()
+            self._debug_add_bank_details()
             self.screenshot("error_add_bank_detail_link.png", full_page=True)
             raise
 
-    def _debug_add_bank_detail(self):
+    def _debug_add_bank_module(self):
         """Debug helper for add bank detail"""
         try:
-            selector = SELF_SERVICE_PAGE.ADD_BANK_DETAIL_BUTTON
+            selector = SELF_SERVICE_PAGE.ADD_BANK_DETAIL_MODULE
+            locator = self.page.locator(selector)
+
+            logger.info(f"\n🔍 Debug info for: {selector}")
+            logger.info(f"   Count: {locator.count()}")
+
+            if locator.count() > 0:
+                logger.info(f"   Visible: {locator.is_visible()}")
+                logger.info(f"   Enabled: {locator.is_enabled()}")
+                logger.info(f"   Text: {locator.text_content()}")
+            else:
+                logger.info("   ❌ Element not found!")
+                # List all links on page
+                all_links = self.page.locator("a").all()
+                logger.info(f"\n   All links on page ({len(all_links)}):")
+                for i, link in enumerate(all_links[:10]):
+                    text = link.text_content() or ""
+                    href = link.get_attribute("href") or ""
+                    logger.info(f"      {i + 1}. Text: '{text.strip()}' | href: '{href}'")
+
+        except Exception as e:
+            logger.warning(f"   Debug failed: {e}")
+
+    def _debug_add_bank_details(self):
+        """Debug helper for add bank detail"""
+        try:
+            selector = SELF_SERVICE_PAGE.ADD_NEW_BANK_DETAIL_BUTTON
             locator = self.page.locator(selector)
 
             logger.info(f"\n🔍 Debug info for: {selector}")

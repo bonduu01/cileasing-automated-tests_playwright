@@ -39,7 +39,8 @@ class SelfServicePageSelectors:
     LOGOUT_LINK: str = "p.text-danger:has-text('Logout')"
     EDIT_LINK: str = "button:has-text('Edit')"
     EDIT_SUBMIT_BUTTON: str = "button:has-text('Submit')"
-    ADD_BANK_DETAIL_BUTTON: str = "button:has-text('Bank Details')"
+    ADD_BANK_DETAIL_MODULE: str = "button:has-text('Bank Details')"
+    ADD_NEW_BANK_DETAIL_BUTTON: str = "button.px-4.py-1.text-\\[\\#4F5E71\\].bg-white.border-\\[1px\\]"
 
 
 @dataclass(frozen=True)
@@ -50,9 +51,17 @@ class EditSelfServicePageSelectors:
     EDIT_SUBMIT_BUTTON: str = "button:has-text('Submit')"
 
 
+@dataclass(frozen=True)
+class AddBankDetailsPageSelectors:
+    """Selectors for the Add bank Details Self-Service Page."""
+    BANK_NAME_DROPDOWN: str = ".ant-select-item.ant-select-item-option[title='GLOBUS BANK']"
+    BANK_NAME: str = 'GLOBUS BANK'
+
+
 
 # Create singleton instances
 HOME_PAGE = HomePageSelectors()
 LOGIN_PAGE = LoginPageSelectors()
 SELF_SERVICE_PAGE = SelfServicePageSelectors()
 EDIT_SELF_SERVICE_PAGE = EditSelfServicePageSelectors()
+ADD_BANK_DETAILS_PAGE = AddBankDetailsPageSelectors()

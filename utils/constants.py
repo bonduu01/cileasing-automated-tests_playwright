@@ -39,8 +39,10 @@ class SelfServicePageSelectors:
     LOGOUT_LINK: str = "p.text-danger:has-text('Logout')"
     EDIT_LINK: str = "button:has-text('Edit')"
     EDIT_SUBMIT_BUTTON: str = "button:has-text('Submit')"
-    ADD_BANK_DETAIL_MODULE: str = "button:has-text('Bank Details')"
+    CLICK_BANK_DETAIL: str = "button:has-text('Bank Details')"
     ADD_NEW_BANK_DETAIL_BUTTON: str = "button.px-4.py-1.text-\\[\\#4F5E71\\].bg-white.border-\\[1px\\]"
+    EDIT_BANK_BUTTON: str = "button:has(svg path[stroke='#5141A4'])"
+    EMERGENCY_CONTACTS_BUTTON = "role=button[name='Emergency Contacts']"
 
 
 @dataclass(frozen=True)
@@ -56,8 +58,19 @@ class AddBankDetailsPageSelectors:
     """Selectors for the Add bank Details Self-Service Page."""
     BANK_NAME_DROPDOWN = ".ant-select-selector"
     BANK_NAME: str = "GLOBUS BANK"
-    BANK_ID: str = 'input[name="financialInstitutionId"]'  # Also known as financial institution id
+    BANK_ID: str = 'input[name="financialInstitutionId"]'
+    SORT_CODE: str = "input[name='sortingCode']"
     ADD_BANK_BUTTON: str = "button:has-text('Add Bank')"
+
+
+@dataclass(frozen=True)
+class EditBankDetailsPageSelectors:
+    """Selectors for the Edit bank Details Self-Service Page."""
+    BANK_NAME_DROPDOWN = ".ant-select-selector"
+    BANK_NAME: str = "GLOBUS BANK"
+    BANK_ID: str = 'input[name="financialInstitutionId"]'
+    SORT_CODE: str = "input[name='sortingCode']"
+    EDIT_SUBMIT_BUTTON: str = "button:has-text('Save Changes')"
 
 
 
@@ -67,3 +80,4 @@ LOGIN_PAGE = LoginPageSelectors()
 SELF_SERVICE_PAGE = SelfServicePageSelectors()
 EDIT_SELF_SERVICE_PAGE = EditSelfServicePageSelectors()
 ADD_BANK_DETAILS_PAGE = AddBankDetailsPageSelectors()
+EDIT_BANK_DETAILS_PAGE = EditBankDetailsPageSelectors()

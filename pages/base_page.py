@@ -394,6 +394,17 @@ class BasePage:
         logger.info(f"🎨 Verifying error text color: {selector}")
         self.verify_element_visible(selector)
 
+    def verify_input_value_length(self, selector: str, expected_length: int):
+        """Verifies that an input element's value has the expected character length."""
+        element = self.page.locator(selector)
+        logger.info(f"🎨 Verifying error text color: {selector}")
+        # Ensure element is visible first
+        expect(element).to_be_visible()
+
+        # Use a custom assertion with expect for length validation
+        expect(element).to_have_value(
+            re.compile(f"^.{{{expected_length}}}$")
+        )
     # --- Waiting ---
 
     @log_method

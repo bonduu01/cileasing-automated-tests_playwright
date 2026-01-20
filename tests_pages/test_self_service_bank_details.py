@@ -36,8 +36,8 @@ class TestAddBankDetailsPage:
         # Cleanup if needed
 
     @pytest.mark.regression
-    def test_to_add_bank_details(self) -> None:
-        """Test editing personal details with debugging"""
+    def test_to_add_new_bank_details(self) -> None:
+        """Test Add New Bank details with debugging"""
         logger.info("📋 Test go add bank Details")
         # Debug: Check current page
         logger.info(f"📍 Current URL: {self.page.url}")
@@ -51,7 +51,7 @@ class TestAddBankDetailsPage:
 
         # Debug: Check if Add Bank Button is visible
         from utils.constants import SELF_SERVICE_PAGE
-        add_bank_detail_module_link = self.page.locator(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_MODULE)
+        add_bank_detail_module_link = self.page.locator(SELF_SERVICE_PAGE.CLICK_BANK_DETAIL)
 
         logger.info(f"🔍 Add Bank Button visible: {add_bank_detail_module_link.is_visible()}")
         logger.info(f"🔍 Add Bank Button count: {add_bank_detail_module_link.count()}")
@@ -66,3 +66,32 @@ class TestAddBankDetailsPage:
         logger.info(f"📍 After click URL: {self.page.url}")
         add_bank_details_page.create_new_bank_details()
         logger.info("✅ Add bank details created successful")
+
+    @pytest.mark.regression
+    def test_to_edit_bank_details(self) -> None:
+        """Test editing personal details with debugging"""
+        logger.info("📋 Test go add bank Details")
+        # Debug: Check current page
+        logger.info(f"📍 Current URL: {self.page.url}")
+        logger.info(f"📍 Page Title: {self.page.title()}")
+
+        # Wait for page to be ready
+        self.page.wait_for_load_state("domcontentloaded")
+
+        # # Take screenshot before clicking
+        # self.page.screenshot(path="before_click_edit.png", full_page=True)
+
+        # Debug: Check if Add Bank Button is visible
+        from utils.constants import SELF_SERVICE_PAGE
+        bank_detail_link = self.page.locator(SELF_SERVICE_PAGE.CLICK_BANK_DETAIL)
+
+        logger.info(f"🔍 Add Bank Button visible: {bank_detail_link.is_visible()}")
+        logger.info(f"🔍 Add Bank Button count: {bank_detail_link.count()}")
+
+        if bank_detail_link.count() > 0:
+            logger.info(f"🔍 Add Bank Button text: {bank_detail_link.text_content()}")
+
+        # Click to edit
+        edit_bank_details_page = self.self_service_page.click_to_edit_bank_details()
+        edit_bank_details_page.edit_bank_details()
+        edit_bank_details_page.wait(5000)

@@ -5,6 +5,7 @@ Home Page Object for the CAndILeasing application.
 from playwright.sync_api import Page, expect
 
 from pages.add_bank_details_page import AddBankDetailsPage
+from pages.edit_bank_details_page import EditBankDetailsPage
 from pages.edit_self_service_page import EditSelfServicePage
 from pages.home_page import HomePage
 from pages.base_page import BasePage
@@ -108,7 +109,7 @@ class SelfServicePage(BasePage):
             logger.info("🖱️ Click a button to add Bank Details")
             # Wait for the page to be fully loaded
             self.page.wait_for_load_state("domcontentloaded")
-            self.click_element(SELF_SERVICE_PAGE.ADD_BANK_DETAIL_MODULE)
+            self.click_element(SELF_SERVICE_PAGE.CLICK_BANK_DETAIL)
             logger.info("✅ Click Bank Details link")
 
             self.click_element(SELF_SERVICE_PAGE.ADD_NEW_BANK_DETAIL_BUTTON)
@@ -128,7 +129,7 @@ class SelfServicePage(BasePage):
     def _debug_add_bank_module(self):
         """Debug helper for add bank detail"""
         try:
-            selector = SELF_SERVICE_PAGE.ADD_BANK_DETAIL_MODULE
+            selector = SELF_SERVICE_PAGE.CLICK_BANK_DETAIL
             locator = self.page.locator(selector)
 
             logger.info(f"\n🔍 Debug info for: {selector}")
@@ -176,3 +177,23 @@ class SelfServicePage(BasePage):
 
         except Exception as e:
             logger.warning(f"   Debug failed: {e}")
+
+    @log_method
+    def click_to_edit_bank_details(self) -> EditBankDetailsPage:
+        """ Edit Bank Details """
+        logger.info("🖱️ Click a button to view Bank Details")
+        # Wait for the page to be fully loaded
+        self.page.wait_for_load_state("domcontentloaded")
+        self.click_element(SELF_SERVICE_PAGE.CLICK_BANK_DETAIL)
+        logger.info("✅ Click Bank Details link")
+
+        self.click_element(SELF_SERVICE_PAGE.EDIT_BANK_BUTTON)
+
+        logger.info("✅ Click to edit Bank Details link")
+        logger.info("✅ Navigate to edit Bank Details Page")
+        return EditBankDetailsPage(self.page)
+
+    @log_method
+    def click_emergency_contacts_button(self):
+        logger.info("🖱️ Click Emergency Contacts button")
+        self.click_element(SELF_SERVICE_PAGE.EMERGENCY_CONTACTS_BUTTON)

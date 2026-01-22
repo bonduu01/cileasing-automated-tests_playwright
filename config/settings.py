@@ -45,6 +45,8 @@ class Settings(BaseSettings):
     relationship: str = ""
     email: str = ""
     location: str = ""
+    relationship_1: str = ""
+    test_bvn_number: str = '22857690876'
 
     # Browser Settings
     headless: bool = False

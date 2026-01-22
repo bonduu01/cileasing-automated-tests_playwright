@@ -44,6 +44,9 @@ class SelfServicePageSelectors:
     EDIT_BANK_BUTTON: str = "button:has(svg path[stroke='#5141A4'])"
     EMERGENCY_CONTACTS_BUTTON = "role=button[name='Emergency Contacts']"
     EMERGENCY_CONTACTS_ADD_BUTTON = "button[type='button']:has-text('Add New')"
+    EMERGENCY_CONTACTS_EDIT_BUTTON = "div.flex.items-center:has(svg) >> text=Edit"
+    BVN_BUTTON: str = 'button:has-text("BVN")'
+    ADD_BVN_BUTTON: str = 'button[type="button"]:has-text("Add New")'
 
 
 @dataclass(frozen=True)
@@ -89,6 +92,28 @@ class AddEmergencyContactPageSelectors:
     ADD_CONTACT_BUTTON: str = "button:has-text('Add Contact')"
 
 
+@dataclass(frozen=True)
+class EditEmergencyContactPageSelectors:
+    FIRST_NAME: str = 'input[name="firstName"]'
+    OTHER_NAME: str = 'input[name="otherName"]'
+    SURNAME: str = 'input[name="surname"]'
+    MAIDEN_NAME: str = "input[name='maidenName']"
+    PREVIOUS_NAME: str = "input[name='previousName']"
+    MOBILE_NUMBER: str = "input[name='mobileNumber']"
+    WORK_NUMBER: str = "input[name='workNumber']"
+    RELATIONSHIP: str = "input[name='relationship']"
+    EMAIL: str = "input[name='email']"
+    LOCATION: str = "input[name='location']"
+    EDIT_CONTACT_BUTTON: str = "role=button[name='Save Changes']"
+
+
+@dataclass(frozen=True)
+class AddBnvPageSelectors:
+    """Selectors for Add BVN Self-Service Page."""
+    BVN_INPUT: str = 'input[name="bvn"]'
+    ADD_BVN_BUTTON: str = "button[type='submit']:has-text('Add BVN')"
+
+
 # Create singleton instances
 HOME_PAGE = HomePageSelectors()
 LOGIN_PAGE = LoginPageSelectors()
@@ -97,3 +122,5 @@ EDIT_SELF_SERVICE_PAGE = EditSelfServicePageSelectors()
 ADD_BANK_DETAILS_PAGE = AddBankDetailsPageSelectors()
 EDIT_BANK_DETAILS_PAGE = EditBankDetailsPageSelectors()
 ADD_EMERGENCY_CONTACT_PAGE = AddEmergencyContactPageSelectors()
+EDIT_EMERGENCY_CONTACT_PAGE = EditEmergencyContactPageSelectors()
+ADD_BVN_PAGE = AddBnvPageSelectors()

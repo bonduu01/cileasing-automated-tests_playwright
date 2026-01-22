@@ -94,4 +94,3 @@ class TestAddBankDetailsPage:
         # Click to edit
         edit_bank_details_page = self.self_service_page.click_to_edit_bank_details()
         edit_bank_details_page.edit_bank_details()
-        edit_bank_details_page.wait(5000)

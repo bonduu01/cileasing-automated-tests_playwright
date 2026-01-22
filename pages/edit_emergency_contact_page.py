@@ -6,7 +6,7 @@ from playwright.sync_api import Page
 
 from pages.base_page import BasePage
 from config import settings
-from utils.constants import EDIT_BANK_DETAILS_PAGE, ADD_EMERGENCY_CONTACT_PAGE
+from utils.constants import EDIT_EMERGENCY_CONTACT_PAGE
 import logging
 
 from utils.decorators import log_method
@@ -34,22 +34,22 @@ class EditEmergencyContactPage(BasePage):
         previous_name = previous_name or settings.previous_name
         mobile_number = mobile_number or settings.mobile_number
         work_number = work_number or settings.work_number
-        relationship = relationship or settings.relationship
+        relationship = relationship or settings.relationship_1
         email = email or settings.email
         location = location or settings.location
 
         logger.info(f"🔐 Fill emergency contacts form")
 
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.FIRST_NAME, first_name)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.OTHER_NAME, other_name)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.SURNAME, surname)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.MAIDEN_NAME, maiden_name)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.PREVIOUS_NAME, previous_name)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.MOBILE_NUMBER, mobile_number)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.WORK_NUMBER, work_number)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.RELATIONSHIP, relationship)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.EMAIL, email)
-        self.fill_input(ADD_EMERGENCY_CONTACT_PAGE.LOCATION, location)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.FIRST_NAME, first_name)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.OTHER_NAME, other_name)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.SURNAME, surname)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.MAIDEN_NAME, maiden_name)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.PREVIOUS_NAME, previous_name)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.MOBILE_NUMBER, mobile_number)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.WORK_NUMBER, work_number)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.RELATIONSHIP, relationship)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.EMAIL, email)
+        self.fill_input(EDIT_EMERGENCY_CONTACT_PAGE.LOCATION, location)
 
         logger.info(f"🔐 Submit emergency contacts form")
-        self.click_element(ADD_EMERGENCY_CONTACT_PAGE.ADD_CONTACT_BUTTON)
+        self.click_element(EDIT_EMERGENCY_CONTACT_PAGE.EDIT_CONTACT_BUTTON)

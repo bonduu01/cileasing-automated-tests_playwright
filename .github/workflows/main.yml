@@ -2,8 +2,8 @@ name: Playwright Tests with Allure Reports
 
 on:
   push:
-    branches: [ main, develop ]
-  pull_request:
+    #    branches: [ main, develop ]
+    #  pull_request:
     branches: [ main, develop ]
   schedule:
     # Run tests daily at 2 AM UTC

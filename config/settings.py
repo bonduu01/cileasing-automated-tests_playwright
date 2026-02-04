@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     test_expiry_date: str = ''
 
     # Browser Settings
-    headless: bool = False
+    headless: bool = True
     slow_mo: int = 0
     timeout: int = 30000
 

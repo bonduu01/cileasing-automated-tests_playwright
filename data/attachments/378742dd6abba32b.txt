@@ -1,5 +1,0 @@
-INFO     conftest:conftest.py:72 🎭 Closing Playwright instance
-INFO     conftest:conftest.py:55 
-================================================================================
-INFO     conftest:conftest.py:56 ✅ TEST RUN COMPLETED
-INFO     conftest:conftest.py:57 ================================================================================

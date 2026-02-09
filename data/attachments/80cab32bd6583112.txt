@@ -1,0 +1,135 @@
+INFO     conftest:conftest.py:289 
+################################################################################
+INFO     conftest:conftest.py:290 🧪 STARTING TEST: test_login_with_no_username
+INFO     conftest:conftest.py:291 ################################################################################
+
+INFO     conftest:conftest.py:111 📋 Creating new browser context
+INFO     conftest:conftest.py:125    ✅ Context created (timeout=30000ms)
+INFO     conftest:conftest.py:140 📄 Creating new page
+INFO     conftest:conftest.py:144    ✅ Page created
+INFO     conftest:conftest.py:145    📍 Initial URL: about:blank
+INFO     conftest:conftest.py:168 🏗️ Creating LoginPage fixture
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized LoginPage
+INFO     pages.login_page:login_page.py:18 🏗️ Initialized LoginPage - URL: https://candileasing.netlify.app/
+INFO     tests_pages.test_user_logins:test_user_logins.py:110 📋 Test Login with no username
+INFO     tests_pages.test_user_logins:test_user_logins.py:111 📋 Step 1: Navigate to login page
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.go_to_login_page()
+INFO     utils.decorators:decorators.py:76 📍 Before: URL=about:blank, Title=
+INFO     pages.login_page:login_page.py:24 🔄 Navigating to login page: https://candileasing.netlify.app/
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.navigate_to()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('https://candileasing.netlify.app/',)
+INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.app/, Wait: networkidle
+INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.863s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.385s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_user_logins:test_user_logins.py:113 📋 Step 2: Enter no username and no password and click button
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_login_button()
+INFO     pages.login_page:login_page.py:56 🖱️ Clicking login button
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('button[type="submit"][buttontype="primary"]',)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: button[type="submit"][buttontype="primary"]
+INFO     pages.base_page:base_page.py:544    🔍 Element state - Count: 0
+WARNING  pages.base_page:base_page.py:559    ⚠️ Element not found in DOM: button[type="submit"][buttontype="primary"]
+INFO     pages.base_page:base_page.py:93    ✅ Click successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.211s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.212s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_user_logins:test_user_logins.py:115 📋 Step 3: Verify username error
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_username_blank_error()
+INFO     pages.login_page:login_page.py:88 🔍 Verifying username and password blank errors
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_validation_error()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Email cannot be blank',)
+INFO     pages.base_page:base_page.py:368 ⚠️ Verifying validation error: Email cannot be blank
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_validation_error()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Password cannot be blank',)
+INFO     pages.base_page:base_page.py:368 ⚠️ Verifying validation error: Password cannot be blank
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.003s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.009s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_user_logins:test_user_logins.py:117 📋 Step 4: Verify username error visible
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.is_username_blank_error_visible()
+INFO     pages.login_page:login_page.py:103 👁️ Checking username blank error visibility
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.is_validation_error_visible()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Email cannot be blank',)
+INFO     pages.base_page:base_page.py:384 🔍 Checking validation error visibility: Email cannot be blank
+INFO     pages.base_page:base_page.py:386    Result: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: True
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.003s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.login_page:login_page.py:105  Result: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: True
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_user_logins:test_user_logins.py:119 📋 Step 5: Verify password error visible
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.is_password_blank_error_visible()
+INFO     pages.login_page:login_page.py:95 👁️ Checking password blank error visibility
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.is_validation_error_visible()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Password cannot be blank',)
+INFO     pages.base_page:base_page.py:384 🔍 Checking validation error visibility: Password cannot be blank
+INFO     pages.base_page:base_page.py:386    Result: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: True
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.003s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.login_page:login_page.py:97  Result: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: True
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
+INFO     utils.decorators:decorators.py:45 ============================================================
+INFO     conftest:conftest.py:149 📄 Closing page (final URL: https://candileasing.netlify.app/)
+INFO     conftest:conftest.py:129 📋 Closing browser context
+INFO     conftest:conftest.py:295 
+################################################################################
+INFO     conftest:conftest.py:296 🏁 FINISHED TEST: test_login_with_no_username
+INFO     conftest:conftest.py:297 ################################################################################
+
+INFO     conftest:conftest.py:100 🌐 Closing browser
+INFO     conftest:conftest.py:72 🎭 Closing Playwright instance
+INFO     conftest:conftest.py:55 
+================================================================================
+INFO     conftest:conftest.py:56 ✅ TEST RUN COMPLETED
+INFO     conftest:conftest.py:57 ================================================================================

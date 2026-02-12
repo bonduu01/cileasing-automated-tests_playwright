@@ -50,7 +50,7 @@ class TestIdentityPage:
         add_identity_page = self.self_service_page.click_to_add_new_identity()
 
         logger.info(f"📍 After click URL: {self.page.url}")
-        add_identity_page.create_identity()
+        add_identity_page.create_new_identity()
         logger.info("✅ BVN created successfully")
 
     @pytest.mark.regression

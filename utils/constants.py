@@ -113,13 +113,15 @@ class EditEmergencyContactPageSelectors:
 @dataclass(frozen=True)
 class AddBnvPageSelectors:
     """Selectors for Add BVN Self-Service Page."""
-    BVN_INPUT: str = 'input[name="bvn"]'
+    # BVN_INPUT: str = 'input[name="bvn"]'
+    BVN_INPUT: str = 'input[name = "bvn"][placeholder = "Enter BVN"]'
     ADD_BVN_BUTTON: str = "button[type='submit']:has-text('Add BVN')"
 
 
 @dataclass(frozen=True)
 class EditBnvPageSelectors:
     """Selectors for Add BVN Self-Service Page."""
+    BVN_INPUT: str = 'input[name = "bvn"][placeholder = "Enter BVN"]'
     EDIT_INPUT: str = 'input[name="bvn"]'
     EDIT_BVN_BUTTON: str = 'button[type="submit"]:has-text("Save Changes")'
 

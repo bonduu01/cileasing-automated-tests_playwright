@@ -16,7 +16,6 @@ on:
         options:
           - all
           - smoke
-          - login
           - regression
       browser:
         description: 'Browser to test'
@@ -133,96 +132,7 @@ jobs:
             junit-smoke.xml
           retention-days: 30
 
-  #  # Job 2: Run Login Tests
-  #  login-tests:
-  #    name: Login Tests
-  #    runs-on: ubuntu-latest
-  #    timeout-minutes: 3  # Fail if login tests take longer than 10 minutes
-  #    if: github.event.inputs.test_suite == 'login' || github.event.inputs.test_suite == 'all' || github.event_name != 'workflow_dispatch'
-  #
-  #    steps:
-  #      - name: Checkout code
-  #        uses: actions/checkout@v4
-  #
-  #      - name: Set up Python
-  #        uses: actions/setup-python@v5
-  #        with:
-  #          python-version: ${{ env.PYTHON_VERSION }}
-  #          cache: 'pip'
-  #
-  #      - name: Install dependencies
-  #        run: |
-  #          python -m pip install --upgrade pip
-  #          pip install -r requirements.txt
-  #
-  #      - name: Install Playwright browsers
-  #        run: |
-  #          playwright install --with-deps ${{ github.event.inputs.browser || 'chromium' }}
-  #          playwright --version
-  #
-  #      - name: Create directories
-  #        run: |
-  #          mkdir -p screenshots
-  #          mkdir -p allure-results
-  #          mkdir -p test-results
-  #
-  #      - name: Run Login Tests
-  #        id: login_tests
-  #        continue-on-error: false
-  #        env:
-  #          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
-  #          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-  #          TEST_ENV: ci
-  #          BROWSER: ${{ github.event.inputs.browser || 'chromium' }}
-  #        run: |
-  #          set +e
-  #
-  #          pytest tests_pages/test_user_logins.py \
-  #            --alluredir=allure-results \
-  #            --clean-alluredir \
-  #            --browser=${{ github.event.inputs.browser || 'chromium' }} \
-  #            --tracing=retain-on-failure \
-  #            --screenshot=only-on-failure \
-  #            --video=retain-on-failure \
-  #            -v \
-  #            --tb=short \
-  #            --junit-xml=junit-login.xml
-  #
-  #          TEST_EXIT_CODE=$?
-  #
-  #          if [ $TEST_EXIT_CODE -eq 4 ]; then
-  #            echo "❌ FATAL: Pytest collection failed (import/syntax error)"
-  #            exit 1
-  #          elif [ $TEST_EXIT_CODE -eq 3 ]; then
-  #            echo "❌ FATAL: Internal pytest error"
-  #            exit 1
-  #          elif [ $TEST_EXIT_CODE -eq 2 ]; then
-  #            echo "⚠️ WARNING: Tests interrupted"
-  #            exit $TEST_EXIT_CODE
-  #          elif [ $TEST_EXIT_CODE -eq 1 ]; then
-  #            echo "⚠️ Some tests failed (acceptable for reporting)"
-  #            exit 0
-  #          elif [ $TEST_EXIT_CODE -eq 5 ]; then
-  #            echo "⚠️ No tests collected"
-  #            exit 1
-  #          else
-  #            echo "✅ Tests completed successfully"
-  #            exit 0
-  #          fi
-  #
-  #      - name: Upload Login Test Results
-  #        if: always()
-  #        uses: actions/upload-artifact@v4
-  #        with:
-  #          name: login-test-results
-  #          path: |
-  #            allure-results/
-  #            screenshots/
-  #            test-results/
-  #            junit-login.xml
-  #          retention-days: 30
-
-  # Job 3: Run Regression Tests
+  # Job 2: Run Regression Tests
   regression-tests:
     name: Regression Tests
     runs-on: ubuntu-latest
@@ -311,12 +221,12 @@ jobs:
             junit-regression.xml
           retention-days: 30
 
-  # Job 4: Generate and Deploy Allure Report
+  # Job 3: Generate and Deploy Allure Report
   generate-report:
     name: Generate Allure Report
     runs-on: ubuntu-latest
     timeout-minutes: 5  # Report generation should be fast
-    needs: [ smoke-tests, login-tests, regression-tests ]
+    needs: [ smoke-tests, regression-tests ]
     if: always()
 
     steps:
@@ -327,7 +237,6 @@ jobs:
         id: check_tests
         run: |
           if [ "${{ needs.smoke-tests.result }}" == "success" ] || \
-             [ "${{ needs.login-tests.result }}" == "success" ] || \
              [ "${{ needs.regression-tests.result }}" == "success" ]; then
             echo "has_results=true" >> $GITHUB_OUTPUT
             echo "✅ At least one test suite ran successfully"
@@ -482,12 +391,12 @@ jobs:
           echo "**Browser:** ${{ github.event.inputs.browser || 'chromium' }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
 
-  # Job 5: Notify Results
+  # Job 4: Notify Results
   notify-results:
     name: Test Results Summary
     runs-on: ubuntu-latest
     timeout-minutes: 2  # Summary generation should be very fast
-    needs: [ smoke-tests, login-tests, regression-tests, generate-report ]
+    needs: [ smoke-tests, regression-tests, generate-report ]
     if: always()
 
     steps:
@@ -506,16 +415,6 @@ jobs:
             echo "### ⏭️ Smoke Tests: SKIPPED" >> $GITHUB_STEP_SUMMARY
           elif [ "${{ needs.smoke-tests.result }}" == "cancelled" ]; then
             echo "### ⏱️ Smoke Tests: TIMEOUT (>10 minutes)" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          if [ "${{ needs.login-tests.result }}" == "success" ]; then
-            echo "### ✅ Login Tests: PASSED" >> $GITHUB_STEP_SUMMARY
-          elif [ "${{ needs.login-tests.result }}" == "failure" ]; then
-            echo "### ❌ Login Tests: FAILED" >> $GITHUB_STEP_SUMMARY
-          elif [ "${{ needs.login-tests.result }}" == "skipped" ]; then
-            echo "### ⏭️ Login Tests: SKIPPED" >> $GITHUB_STEP_SUMMARY
-          elif [ "${{ needs.login-tests.result }}" == "cancelled" ]; then
-            echo "### ⏱️ Login Tests: TIMEOUT (>10 minutes)" >> $GITHUB_STEP_SUMMARY
           fi
           
           if [ "${{ needs.regression-tests.result }}" == "success" ]; then
@@ -550,7 +449,6 @@ jobs:
           
           # Add timeout warning if any job was cancelled
           if [ "${{ needs.smoke-tests.result }}" == "cancelled" ] || \
-             [ "${{ needs.login-tests.result }}" == "cancelled" ] || \
              [ "${{ needs.regression-tests.result }}" == "cancelled" ]; then
             echo "⚠️ **WARNING:** One or more test jobs exceeded the 10-minute timeout." >> $GITHUB_STEP_SUMMARY
             echo "Consider:" >> $GITHUB_STEP_SUMMARY

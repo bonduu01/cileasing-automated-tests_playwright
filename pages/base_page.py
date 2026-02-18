@@ -59,7 +59,7 @@ class BasePage:
     # --- Element Interaction ---
 
     @log_method
-    def click_element(self, selector: str, timeout: int = 120000, **kwargs) -> None:
+    def click_element(self, selector: str, timeout: int = 30000, **kwargs) -> None:
         """
         Click an element identified by selector with proper waits.
 
@@ -97,7 +97,7 @@ class BasePage:
             raise
 
     @log_method
-    def fill_input(self, selector: str, value: str, timeout: int = 120000) -> None:
+    def fill_input(self, selector: str, value: str, timeout: int = 30000) -> None:
         """Fill an input field with the specified value."""
         logger.info(f"✍️ Selector: {selector}, Value: {value}")
         try:

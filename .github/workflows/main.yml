@@ -38,12 +38,11 @@ env:
   PLAYWRIGHT_BROWSERS_PATH: '0'
 
 jobs:
-  # Job 1: Run Smoke Tests (always runs first)
+  # Job 1: Run Smoke Tests
   smoke-tests:
     name: Smoke Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    # Run if: smoke selected, all selected, or not workflow_dispatch (push/schedule)
+    timeout-minutes: 5  # Fail if smoke tests take longer than 10 minutes
     if: github.event.inputs.test_suite == 'smoke' || github.event.inputs.test_suite == 'all' || github.event_name != 'workflow_dispatch'
 
     steps:
@@ -84,7 +83,7 @@ jobs:
           set +e
           
           pytest tests_pages/ -m smoke \
-            --alluredir=allure-results/smoke \
+            --alluredir=allure-results \
             --clean-alluredir \
             --browser=${{ github.event.inputs.browser || 'chromium' }} \
             --tracing=retain-on-failure \
@@ -98,6 +97,7 @@ jobs:
           
           if [ $TEST_EXIT_CODE -eq 4 ]; then
             echo "❌ FATAL: Pytest collection failed (import error, syntax error, etc.)"
+            echo "This indicates a problem with test files or dependencies."
             exit 1
           elif [ $TEST_EXIT_CODE -eq 3 ]; then
             echo "❌ FATAL: Internal pytest error"
@@ -110,6 +110,10 @@ jobs:
             exit 0
           elif [ $TEST_EXIT_CODE -eq 5 ]; then
             echo "⚠️ No tests collected"
+            echo "Check if:"
+            echo "  1. Tests have @pytest.mark.smoke decorator"
+            echo "  2. Test files exist in tests_pages/"
+            echo "  3. Test file names start with 'test_'"
             exit 1
           else
             echo "✅ Tests completed successfully"
@@ -128,18 +132,12 @@ jobs:
             junit-smoke.xml
           retention-days: 30
 
-  # Job 2: Run Regression Tests (runs AFTER smoke-tests complete)
+  # Job 2: Run Regression Tests
   regression-tests:
     name: Regression Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 7
-    needs: smoke-tests  # ⭐ KEY: Waits for smoke-tests to finish
-    # Run if: regression selected, all selected, or not workflow_dispatch
-    # Also check if smoke-tests didn't fail catastrophically (allow failure for test assertions, not setup)
-    if: |
-      always() && 
-      (needs.smoke-tests.result == 'success' || needs.smoke-tests.result == 'failure') &&
-      (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all' || github.event_name != 'workflow_dispatch')
+    timeout-minutes: 7  # Fail if regression tests take longer than 10 minutes (increase as test suite grows)
+    if: github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all' || github.event_name != 'workflow_dispatch'
 
     steps:
       - name: Checkout code
@@ -179,7 +177,7 @@ jobs:
           set +e
           
           pytest tests_pages/ -m regression \
-            --alluredir=allure-results/regression \
+            --alluredir=allure-results \
             --clean-alluredir \
             --browser=${{ github.event.inputs.browser || 'chromium' }} \
             --tracing=retain-on-failure \
@@ -227,9 +225,9 @@ jobs:
   generate-report:
     name: Generate Allure Report
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: [ smoke-tests, regression-tests ]  # Waits for both
-    if: always()  # Run even if tests fail
+    timeout-minutes: 5  # Report generation should be fast
+    needs: [ smoke-tests, regression-tests ]
+    if: always()
 
     steps:
       - name: Checkout code
@@ -238,16 +236,13 @@ jobs:
       - name: Check if any tests ran
         id: check_tests
         run: |
-          smoke_ran="${{ needs.smoke-tests.result }}"
-          regression_ran="${{ needs.regression-tests.result }}"
-          
-          # Check if either job actually ran (not skipped)
-          if [ "$smoke_ran" != "skipped" ] || [ "$regression_ran" != "skipped" ]; then
+          if [ "${{ needs.smoke-tests.result }}" == "success" ] || \
+             [ "${{ needs.regression-tests.result }}" == "success" ]; then
             echo "has_results=true" >> $GITHUB_OUTPUT
-            echo "✅ At least one test suite ran"
+            echo "✅ At least one test suite ran successfully"
           else
             echo "has_results=false" >> $GITHUB_OUTPUT
-            echo "❌ All test suites were skipped"
+            echo "❌ All test suites failed during setup/collection"
           fi
 
       - name: Download all test results
@@ -255,7 +250,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: all-results
-          pattern: "*-test-results"  # Download both smoke and regression
 
       - name: Merge Allure Results
         if: steps.check_tests.outputs.has_results == 'true'
@@ -263,7 +257,6 @@ jobs:
           mkdir -p allure-results
           echo "Merging allure results from all test suites..."
           
-          # Find and merge all allure-results subdirectories
           find all-results -type d -name "allure-results" | while read dir; do
             echo "Copying from: $dir"
             cp -r "$dir"/* allure-results/ 2>/dev/null || true
@@ -275,7 +268,6 @@ jobs:
           echo "Total files: $(find allure-results -type f | wc -l)"
           echo "JSON result files: $(find allure-results -name "*-result.json" | wc -l)"
           
-          # Create environment.properties
           cat > allure-results/environment.properties << EOF
           Browser=${{ github.event.inputs.browser || 'chromium' }}
           Framework=Playwright
@@ -361,6 +353,7 @@ jobs:
             echo "History saved for next run"
           fi
           
+          # Create .nojekyll to prevent GitHub Pages from processing files
           touch gh-pages-deploy/.nojekyll
           
           echo "Deployment directory prepared"
@@ -383,7 +376,7 @@ jobs:
         run: |
           echo "### ❌ Report Generation Skipped" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "All test suites were skipped." >> $GITHUB_STEP_SUMMARY
+          echo "All test suites failed during setup or collection phase." >> $GITHUB_STEP_SUMMARY
 
       - name: Add report link to summary
         if: steps.check_tests.outputs.has_results == 'true'
@@ -402,7 +395,7 @@ jobs:
   notify-results:
     name: Test Results Summary
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 2  # Summary generation should be very fast
     needs: [ smoke-tests, regression-tests, generate-report ]
     if: always()
 
@@ -411,41 +404,35 @@ jobs:
         run: |
           echo "# 🧪 Playwright Test Execution Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Execution Order" >> $GITHUB_STEP_SUMMARY
-          echo "1. Smoke Tests → 2. Regression Tests (sequential)" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
           echo "## Job Status" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          # Smoke Tests Status
-          smoke_result="${{ needs.smoke-tests.result }}"
-          if [ "$smoke_result" == "success" ]; then
+          if [ "${{ needs.smoke-tests.result }}" == "success" ]; then
             echo "### ✅ Smoke Tests: PASSED" >> $GITHUB_STEP_SUMMARY
-          elif [ "$smoke_result" == "failure" ]; then
+          elif [ "${{ needs.smoke-tests.result }}" == "failure" ]; then
             echo "### ❌ Smoke Tests: FAILED" >> $GITHUB_STEP_SUMMARY
-          elif [ "$smoke_result" == "skipped" ]; then
+          elif [ "${{ needs.smoke-tests.result }}" == "skipped" ]; then
             echo "### ⏭️ Smoke Tests: SKIPPED" >> $GITHUB_STEP_SUMMARY
-          elif [ "$smoke_result" == "cancelled" ]; then
-            echo "### ⏱️ Smoke Tests: TIMEOUT" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ needs.smoke-tests.result }}" == "cancelled" ]; then
+            echo "### ⏱️ Smoke Tests: TIMEOUT (>10 minutes)" >> $GITHUB_STEP_SUMMARY
           fi
           
-          # Regression Tests Status
-          regression_result="${{ needs.regression-tests.result }}"
-          if [ "$regression_result" == "success" ]; then
+          if [ "${{ needs.regression-tests.result }}" == "success" ]; then
             echo "### ✅ Regression Tests: PASSED" >> $GITHUB_STEP_SUMMARY
-          elif [ "$regression_result" == "failure" ]; then
+          elif [ "${{ needs.regression-tests.result }}" == "failure" ]; then
             echo "### ❌ Regression Tests: FAILED" >> $GITHUB_STEP_SUMMARY
-          elif [ "$regression_result" == "skipped" ]; then
+          elif [ "${{ needs.regression-tests.result }}" == "skipped" ]; then
             echo "### ⏭️ Regression Tests: SKIPPED" >> $GITHUB_STEP_SUMMARY
-          elif [ "$regression_result" == "cancelled" ]; then
-            echo "### ⏱️ Regression Tests: TIMEOUT" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ needs.regression-tests.result }}" == "cancelled" ]; then
+            echo "### ⏱️ Regression Tests: TIMEOUT (>10 minutes)" >> $GITHUB_STEP_SUMMARY
           fi
           
-          # Report Status
           if [ "${{ needs.generate-report.result }}" == "success" ]; then
             echo "### ✅ Report Generation: SUCCESS" >> $GITHUB_STEP_SUMMARY
-          else
+          elif [ "${{ needs.generate-report.result }}" == "failure" ]; then
             echo "### ❌ Report Generation: FAILED" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ needs.generate-report.result }}" == "cancelled" ]; then
+            echo "### ⏱️ Report Generation: TIMEOUT" >> $GITHUB_STEP_SUMMARY
           fi
           
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -459,6 +446,18 @@ jobs:
           fi
           
           echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Add timeout warning if any job was cancelled
+          if [ "${{ needs.smoke-tests.result }}" == "cancelled" ] || \
+             [ "${{ needs.regression-tests.result }}" == "cancelled" ]; then
+            echo "⚠️ **WARNING:** One or more test jobs exceeded the 10-minute timeout." >> $GITHUB_STEP_SUMMARY
+            echo "Consider:" >> $GITHUB_STEP_SUMMARY
+            echo "- Optimizing slow tests" >> $GITHUB_STEP_SUMMARY
+            echo "- Increasing timeout in workflow file" >> $GITHUB_STEP_SUMMARY
+            echo "- Running fewer tests in smoke suite" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
           echo "---" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Build:** #${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY

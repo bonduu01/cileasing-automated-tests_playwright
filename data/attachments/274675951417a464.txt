@@ -1,0 +1,72 @@
+INFO     conftest:conftest.py:39 ================================================================================
+INFO     conftest:conftest.py:40 🚀 TEST RUN STARTED
+INFO     conftest:conftest.py:41    📸 Screenshots: screenshots/
+INFO     conftest:conftest.py:42    🎥 Videos: disabled
+INFO     conftest:conftest.py:43    🌐 Headless: True
+INFO     conftest:conftest.py:44    ⏱️  Timeout: 30000ms
+INFO     conftest:conftest.py:45    📏 Default Viewport: 1920x1080
+INFO     conftest:conftest.py:46 ================================================================================
+
+INFO     conftest:conftest.py:68 🎭 Starting Playwright instance
+INFO     conftest:conftest.py:83 🌐 Launching browser (headless=True, slow_mo=0)
+INFO     conftest:conftest.py:91    ✅ Browser launched: chromium
+INFO     conftest:conftest.py:296 
+################################################################################
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_to_add_new_bank_details
+INFO     conftest:conftest.py:298 ################################################################################
+
+INFO     conftest:conftest.py:106 📋 Creating new browser context
+INFO     conftest:conftest.py:112    📏 Setting viewport to: 1920x1080
+INFO     conftest:conftest.py:130    ✅ Context created (timeout=30000ms)
+INFO     conftest:conftest.py:145 📄 Creating new page
+INFO     conftest:conftest.py:151    📏 Verified viewport: 1920x1080
+INFO     conftest:conftest.py:152    📍 Initial URL: about:blank
+INFO     conftest:conftest.py:197 
+============================================================
+INFO     conftest:conftest.py:198 🔐 AUTHENTICATION SETUP
+INFO     conftest:conftest.py:199 ============================================================
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized LoginPage
+INFO     pages.login_page:login_page.py:18 🏗️ Initialized LoginPage - URL: https://candileasing.netlify.app/
+INFO     conftest:conftest.py:204 📋 Step 1: Navigate to login page
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.go_to_login_page()
+INFO     utils.decorators:decorators.py:76 📍 Before: URL=about:blank, Title=
+INFO     pages.login_page:login_page.py:24 🔄 Navigating to login page: https://candileasing.netlify.app/
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.navigate_to()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('https://candileasing.netlify.app/',)
+INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.app/, Wait: networkidle
+ERROR    pages.base_page:base_page.py:43    ❌ Navigation failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
+
+WARNING  pages.base_page:base_page.py:580    ⚠️ Screenshot failed: Page.screenshot: Timeout 30000ms exceeded.
+Call log:
+  - taking page screenshot
+  - waiting for fonts to load...
+
+ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.navigate_to()
+ERROR    utils.decorators:decorators.py:54    💥 Error: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
+
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 60.012s
+ERROR    utils.decorators:decorators.py:56 ============================================================
+
+ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.go_to_login_page()
+ERROR    utils.decorators:decorators.py:54    💥 Error: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
+
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 60.025s
+ERROR    utils.decorators:decorators.py:56 ============================================================
+
+ERROR    conftest:conftest.py:239 ❌ Authentication setup failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
+INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
+INFO     conftest:conftest.py:134 📋 Closing browser context
+INFO     conftest:conftest.py:302 
+################################################################################
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_to_add_new_bank_details
+INFO     conftest:conftest.py:304 ################################################################################

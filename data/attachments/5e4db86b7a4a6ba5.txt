@@ -1,0 +1,67 @@
+INFO     conftest:conftest.py:296 
+################################################################################
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_go_to_home_page_with_pom
+INFO     conftest:conftest.py:298 ################################################################################
+
+INFO     conftest:conftest.py:106 📋 Creating new browser context
+INFO     conftest:conftest.py:112    📏 Setting viewport to: 1920x1080
+INFO     conftest:conftest.py:130    ✅ Context created (timeout=30000ms)
+INFO     conftest:conftest.py:145 📄 Creating new page
+INFO     conftest:conftest.py:151    📏 Verified viewport: 1920x1080
+INFO     conftest:conftest.py:152    📍 Initial URL: about:blank
+INFO     conftest:conftest.py:167 🏗️ Creating HomePage fixture
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized HomePage
+INFO     pages.home_page:home_page.py:22 🏗️ Initialized HomePage - URL: https://candileasing.netlify.app/
+INFO     tests_pages.test_user_logins:test_user_logins.py:20 📋 Test go to home_page
+INFO     tests_pages.test_user_logins:test_user_logins.py:21 📋 Step 1: Navigate to home page
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: HomePage.go_to_home_page()
+INFO     utils.decorators:decorators.py:76 📍 Before: URL=about:blank, Title=
+INFO     pages.home_page:home_page.py:28 🔄 Navigating to home page: https://candileasing.netlify.app/
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: HomePage.navigate_to()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('https://candileasing.netlify.app/',)
+INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.app/, Wait: networkidle
+INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.887s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.304s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_user_logins:test_user_logins.py:23 📋 Step 2: Verify home page loaded
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: HomePage.verify_home_page_loads()
+INFO     pages.home_page:home_page.py:34 ✅ Verifying HomePage loads
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: HomePage.verify_title()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('CAndILeasing',)
+INFO     pages.base_page:base_page.py:284 📄 Verifying title: CAndILeasing
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.030s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.base_page:base_page.py:318 🚫 Verifying disabled: input[name='password'][type='password']
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.191s
+INFO     utils.decorators:decorators.py:45 ============================================================
+INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
+INFO     conftest:conftest.py:134 📋 Closing browser context
+INFO     conftest:conftest.py:302 
+################################################################################
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_go_to_home_page_with_pom
+INFO     conftest:conftest.py:304 ################################################################################
+
+INFO     conftest:conftest.py:95 🌐 Closing browser
+INFO     conftest:conftest.py:73 🎭 Closing Playwright instance
+INFO     conftest:conftest.py:56 
+================================================================================
+INFO     conftest:conftest.py:57 ✅ TEST RUN COMPLETED
+INFO     conftest:conftest.py:58 ================================================================================

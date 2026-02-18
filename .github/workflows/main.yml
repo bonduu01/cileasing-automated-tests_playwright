@@ -172,14 +172,15 @@ jobs:
           TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           TEST_ENV: ci
+          VIEWPORT_WIDTH: 1920
+          VIEWPORT_HEIGHT: 1080
+          CI: true
           BROWSER: ${{ github.event.inputs.browser || 'chromium' }}
         run: |
-          set +e
-          
+          set +e          
           pytest tests_pages/ -m regression \
             -n auto \
             --headed \
-            --viewport=1920,1080 \
             --alluredir=allure-results \
             --clean-alluredir \
             --browser=${{ github.event.inputs.browser || 'chromium' }} \
@@ -188,9 +189,8 @@ jobs:
             --video=retain-on-failure \
             -v \
             --tb=short \
-            --junit-xml=junit-regression.xml
-          
-          TEST_EXIT_CODE=$?
+            --junit-xml=junit-regression.xml         
+          TEST_EXIT_CODE=$?        
           
           if [ $TEST_EXIT_CODE -eq 4 ]; then
             echo "❌ FATAL: Pytest collection failed (import/syntax error)"

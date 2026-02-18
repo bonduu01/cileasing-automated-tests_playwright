@@ -42,6 +42,7 @@ def setup_logging():
     logger.info(f"   🎥 Videos: {settings.video_dir if settings.record_video else 'disabled'}")
     logger.info(f"   🌐 Headless: {settings.headless}")
     logger.info(f"   ⏱️  Timeout: {settings.timeout}ms")
+    logger.info(f"   📏 Default Viewport: {os.getenv('VIEWPORT_WIDTH', 1920)}x{os.getenv('VIEWPORT_HEIGHT', 1080)}")
     logger.info(f"{'=' * 80}\n")
 
 
@@ -87,12 +88,6 @@ def browser(playwright_instance: Playwright) -> Generator[Browser, None, None]:
         args=['--start-maximized']
     )
 
-
-    # browser = playwright_instance.webkit.launch(
-    #     headless=settings.headless,
-    #     slow_mo=settings.slow_mo,
-    # )
-
     logger.info(f"   ✅ Browser launched: {browser.browser_type.name}")
 
     yield browser
@@ -110,8 +105,18 @@ def context(browser: Browser) -> Generator[BrowserContext, None, None]:
     logger = logging.getLogger(__name__)
     logger.info("📋 Creating new browser context")
 
+    # Get viewport settings from environment variables (for CI/CD)
+    viewport_width = int(os.getenv("VIEWPORT_WIDTH", 1920))
+    viewport_height = int(os.getenv("VIEWPORT_HEIGHT", 1080))
+
+    logger.info(f"   📏 Setting viewport to: {viewport_width}x{viewport_height}")
+
     context_options = {
         "accept_downloads": True,
+        "viewport": {
+            "width": viewport_width,
+            "height": viewport_height,
+        }
     }
 
     # Add video recording if enabled
@@ -119,7 +124,7 @@ def context(browser: Browser) -> Generator[BrowserContext, None, None]:
         context_options["record_video_dir"] = settings.video_dir
         logger.info(f"   🎥 Video recording enabled: {settings.video_dir}")
 
-    context = browser.new_context(**context_options, no_viewport=True)
+    context = browser.new_context(**context_options)
     context.set_default_timeout(settings.timeout)
 
     logger.info(f"   ✅ Context created (timeout={settings.timeout}ms)")
@@ -141,7 +146,9 @@ def page(context: BrowserContext) -> Generator[Page, None, None]:
 
     page = context.new_page()
 
-    logger.info(f"   ✅ Page created")
+    # Verify viewport is set correctly
+    viewport = page.viewport_size
+    logger.info(f"   📏 Verified viewport: {viewport['width']}x{viewport['height']}")
     logger.info(f"   📍 Initial URL: {page.url}")
 
     yield page

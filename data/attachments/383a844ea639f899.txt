@@ -1,6 +1,6 @@
 INFO     conftest:conftest.py:296 
 ################################################################################
-INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_login_with_wrong_username
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_login_with_wrong_password
 INFO     conftest:conftest.py:298 ################################################################################
 
 INFO     conftest:conftest.py:106 📋 Creating new browser context
@@ -12,8 +12,8 @@ INFO     conftest:conftest.py:152    📍 Initial URL: about:blank
 INFO     conftest:conftest.py:175 🏗️ Creating LoginPage fixture
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized LoginPage
 INFO     pages.login_page:login_page.py:18 🏗️ Initialized LoginPage - URL: https://candileasing.netlify.app/
-INFO     tests_pages.test_user_logins:test_user_logins.py:53 📋 Test Login with wrong username
-INFO     tests_pages.test_user_logins:test_user_logins.py:54 📋 Step 1: Navigate to login page
+INFO     tests_pages.test_user_logins:test_user_logins.py:69 📋 Test Login with wrong password
+INFO     tests_pages.test_user_logins:test_user_logins.py:70 📋 Step 1: Navigate to login page
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.go_to_login_page()
 INFO     utils.decorators:decorators.py:76 📍 Before: URL=about:blank, Title=
@@ -25,60 +25,60 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.886s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.849s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.179s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.177s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     tests_pages.test_user_logins:test_user_logins.py:56 📋 Step 2: Enter wrong username
+INFO     tests_pages.test_user_logins:test_user_logins.py:72 📋 Step 2: Enter correct username
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.enter_email()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('bonduu001@yahoo.com',)
-INFO     pages.login_page:login_page.py:44 📧 Entering email: bonduu001@yahoo.com
+INFO     utils.decorators:decorators.py:31    📥 Args: ('ekundayorotimi@gmail.com',)
+INFO     pages.login_page:login_page.py:44 📧 Entering email: ekundayorotimi@gmail.com
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="email"]', 'bonduu001@yahoo.com')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="email"], Value: bonduu001@yahoo.com
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="email"]', 'ekundayorotimi@gmail.com')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="email"], Value: ekundayorotimi@gmail.com
 INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 0
 WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: input[name="email"]
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.175s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.179s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.175s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.180s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     tests_pages.test_user_logins:test_user_logins.py:58 📋 Step 3: Enter correct password
+INFO     tests_pages.test_user_logins:test_user_logins.py:74 📋 Step 3: Enter wrong password
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.enter_password()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('PAa@12345',)
-INFO     pages.login_page:login_page.py:50 🔑 Entering password: *********
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Bat165474@@',)
+INFO     pages.login_page:login_page.py:50 🔑 Entering password: ***********
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="password"]', 'PAa@12345')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="password"], Value: PAa@12345
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="password"]', 'Bat165474@@')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="password"], Value: Bat165474@@
 INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
 INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.043s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.048s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.043s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.049s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     tests_pages.test_user_logins:test_user_logins.py:60 📋 Step 4: Click login button
+INFO     tests_pages.test_user_logins:test_user_logins.py:76 📋 Step 4: Click login button
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_login_button()
 INFO     pages.login_page:login_page.py:56 🖱️ Clicking login button
@@ -92,15 +92,15 @@ INFO     pages.base_page:base_page.py:559       Text: 'Proceed'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.088s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.115s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.089s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.116s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     tests_pages.test_user_logins:test_user_logins.py:62 📋 Step 5: verify error message
+INFO     tests_pages.test_user_logins:test_user_logins.py:78 📋 Step 5: Verify error message
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_error_message()
 INFO     pages.login_page:login_page.py:70 ⚠️ Verifying error message is displayed
@@ -111,12 +111,12 @@ INFO     pages.base_page:base_page.py:338 📝 Verifying text visible - Selector
 INFO     pages.base_page:base_page.py:341    ✅ Text is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.862s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.860s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.862s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.861s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -135,11 +135,11 @@ INFO     utils.decorators:decorators.py:45 =====================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.005s
 INFO     utils.decorators:decorators.py:45 ============================================================
 INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
 INFO     conftest:conftest.py:134 📋 Closing browser context
 INFO     conftest:conftest.py:302 
 ################################################################################
-INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_login_with_wrong_username
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_login_with_wrong_password
 INFO     conftest:conftest.py:304 ################################################################################

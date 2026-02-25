@@ -12,7 +12,7 @@ INFO     conftest:conftest.py:83 🌐 Launching browser (headless=True, slow_mo=
 INFO     conftest:conftest.py:91    ✅ Browser launched: chromium
 INFO     conftest:conftest.py:296 
 ################################################################################
-INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_to_edit_new_emergency_contact
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_to_edit_bank_details
 INFO     conftest:conftest.py:298 ################################################################################
 
 INFO     conftest:conftest.py:106 📋 Creating new browser context
@@ -39,13 +39,13 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.961s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.751s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.314s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.446s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:207 📋 Step 2: Perform login
@@ -62,7 +62,7 @@ WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: in
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.268s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.314s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -74,7 +74,7 @@ INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.083s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.180s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -87,13 +87,13 @@ INFO     pages.base_page:base_page.py:559       Text: 'Proceed'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.120s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.163s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:39 ✅ Login form submitted
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.473s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.659s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:213 📋 Step 3: Verify login successful
@@ -107,7 +107,7 @@ INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.upperca
 INFO     pages.base_page:base_page.py:299    ✅ Element is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.903s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.875s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -117,13 +117,13 @@ INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.space-y
 INFO     pages.base_page:base_page.py:299    ✅ Element is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.043s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.013s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:65 ✅ Company list verified
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.947s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.889s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:216 📋 Step 4: Click default company link
@@ -141,15 +141,15 @@ INFO     pages.base_page:base_page.py:559       Text: 'DEFAULT'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.477s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.385s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:114 ✅ Navigating to Self Service page
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized SelfServicePage
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/personal/self-service, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: <pages.self_service_page.SelfServicePage object at 0x7f6f3620e850>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.501s
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.self_service_page.SelfServicePage object at 0x7fd1e0189c50>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.396s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:219 📋 Step 5: Verify self-service page loads
@@ -163,213 +163,163 @@ INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: span.text-d
 INFO     pages.base_page:base_page.py:299    ✅ Element is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.393s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.384s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.394s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.385s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:222 ✅ Authentication successful
 INFO     conftest:conftest.py:223 ============================================================
 
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:30 📋 Authenticate User module
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:31 📋 Authenticate User module
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized SelfServicePage
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:18 
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:18 
 ################################################################################
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:19 🧪 STARTING TEST: test_to_edit_new_emergency_contact
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:20 ################################################################################
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:69 📍 Current URL: https://candileasing.netlify.app/personal/self-service
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:70 📍 Page Title: CAndILeasing
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:79 🔍 Add Emergency Contact Button visible: True
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:80 🔍 Add Emergency Contact Button count: 1
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:83 🔍 Add Emergency Contact Button text: Emergency Contacts
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:19 🧪 STARTING TEST: test_to_edit_bank_details
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:20 ################################################################################
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:73 📋 Test go add bank Details
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:75 📍 Current URL: https://candileasing.netlify.app/personal/self-service
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:76 📍 Page Title: CAndILeasing
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:88 🔍 Add Bank Button visible: True
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:89 🔍 Add Bank Button count: 1
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:92 🔍 Add Bank Button text: Bank Details
 INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_to_add_emergency_contacts_details()
-INFO     pages.self_service_page:self_service_page.py:203 🖱️ Click Emergency Contacts button
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_to_edit_bank_details()
+INFO     pages.self_service_page:self_service_page.py:189 🖱️ Click a button to view Bank Details
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_element()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("role=button[name='Emergency Contacts']",)
-INFO     pages.base_page:base_page.py:71 🖱️ Selector: role=button[name='Emergency Contacts']
+INFO     utils.decorators:decorators.py:31    📥 Args: ("button:has-text('Bank Details')",)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: button:has-text('Bank Details')
 INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
 INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:559       Text: 'Emergency Contacts'
+INFO     pages.base_page:base_page.py:559       Text: 'Bank Details'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.141s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.133s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     pages.self_service_page:self_service_page.py:206 ✅ Click to Add Emergency Contacts details
+INFO     pages.self_service_page:self_service_page.py:193 ✅ Click Bank Details link
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_element()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("button[type='button']:has-text('Add New')",)
-INFO     pages.base_page:base_page.py:71 🖱️ Selector: button[type='button']:has-text('Add New')
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:559       Text: 'Add New'
-INFO     pages.base_page:base_page.py:93    ✅ Click successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.117s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     pages.base_page:base_page.py:29 🏗️ Initialized AddEmergencyContactPage
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: <pages.add_emergency_contact_page.AddEmergencyContactPage object at 0x7f6f37a7ff90>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.259s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:89 📍 After click URL: https://candileasing.netlify.app/personal/self-service/emergency-contact/add
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.create_new_emergency_contacts_details()
-INFO     pages.add_emergency_contact_page:add_emergency_contact_page.py:41 🔐 Fill emergency contacts form
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="firstName"]', '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="firstName"], Value: 
+INFO     utils.decorators:decorators.py:31    📥 Args: ("button:has(svg path[stroke='#5141A4'])",)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: button:has(svg path[stroke='#5141A4'])
 INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 0
-WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: input[name="firstName"]
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.334s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="otherName"]', '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="otherName"], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.073s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="surname"]', '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="surname"], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.065s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='maidenName']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='maidenName'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.070s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='previousName']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='previousName'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.100s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='mobileNumber']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='mobileNumber'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.100s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='workNumber']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='workNumber'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.063s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='relationship']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='relationship'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.067s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='email']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='email'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.065s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='location']", '')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='location'], Value: 
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
-INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.068s
-INFO     utils.decorators:decorators.py:45 ============================================================
-
-INFO     pages.add_emergency_contact_page:add_emergency_contact_page.py:54 🔐 Submit emergency contacts form
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: AddEmergencyContactPage.click_element()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("button:has-text('Add Contact')",)
-INFO     pages.base_page:base_page.py:71 🖱️ Selector: button:has-text('Add Contact')
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:559       Text: 'Add Contact'
+WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: button:has(svg path[stroke='#5141A4'])
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.115s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.882s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
+INFO     pages.self_service_page:self_service_page.py:197 ✅ Click to edit Bank Details link
+INFO     pages.self_service_page:self_service_page.py:198 ✅ Navigate to edit Bank Details Page
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized EditBankDetailsPage
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.edit_bank_details_page.EditBankDetailsPage object at 0x7fd1e008f890>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.019s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditBankDetailsPage.edit_bank_details()
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditBankDetailsPage.clear_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="financialInstitutionId"]',)
+INFO     pages.base_page:base_page.py:136 🧹 Clearing: input[name="financialInstitutionId"]
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.124s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.351s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:91 ✅ Add Emergency Contact details created successful
-INFO     pages.base_page:base_page.py:440 ⏱️ Waiting for 5000ms
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:23 
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditBankDetailsPage.clear_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='sortingCode']",)
+INFO     pages.base_page:base_page.py:136 🧹 Clearing: input[name='sortingCode']
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.075s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.edit_bank_details_page:edit_bank_details_page.py:34 ✅ TextBoxes value cleared
+INFO     pages.edit_bank_details_page:edit_bank_details_page.py:36 🔐 Attempting to edit bank details to: FIRST BANK PLC, 2234567890 and 0331
+INFO     pages.base_page:base_page.py:174 📋 Waiting for dropdown to finish loading...
+INFO     pages.base_page:base_page.py:179 ✅ Dropdown finished loading
+INFO     pages.base_page:base_page.py:184 📋 Opening dropdown: .ant-select-selector
+INFO     pages.base_page:base_page.py:192 ✅ Dropdown panel visible
+INFO     pages.base_page:base_page.py:206 ⚠️ Role-based selection failed, trying fallback...
+INFO     pages.base_page:base_page.py:216 ✅ Selected (fallback): FIRST BANK PLC
+INFO     pages.edit_bank_details_page:edit_bank_details_page.py:41 ✅ Edit Bank details page and click Submit
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditBankDetailsPage.fill_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="financialInstitutionId"]', '2234567890')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="financialInstitutionId"], Value: 2234567890
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:121    ✅ Fill successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.084s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.base_page:base_page.py:408 🎨 Verifying error text color: input[name="financialInstitutionId"]
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditBankDetailsPage.fill_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='sortingCode']", '0331')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='sortingCode'], Value: 0331
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:121    ✅ Fill successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.072s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditBankDetailsPage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("button:has-text('Save Changes')",)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: button:has-text('Save Changes')
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: False
+INFO     pages.base_page:base_page.py:559       Text: 'Save Changes'
+ERROR    pages.base_page:base_page.py:95    ❌ Click failed: Locator expected to be enabled
+Actual value: disabled 
+Call log:
+  - Expect "to_be_enabled" with timeout 30000ms
+  - waiting for locator("button:has-text('Save Changes')")
+    34 × locator resolved to <button disabled type="submit" buttontype="primary" class="sc-jUkaYT kfipNq">Save Changes</button>
+       - unexpected value "disabled"
+
+INFO     pages.base_page:base_page.py:578    📸 Screenshot saved: screenshots/click_error_1771993396.png
+ERROR    utils.decorators:decorators.py:53    ❌ FAILED: EditBankDetailsPage.click_element()
+ERROR    utils.decorators:decorators.py:54    💥 Error: AssertionError: Locator expected to be enabled
+Actual value: disabled 
+Call log:
+  - Expect "to_be_enabled" with timeout 30000ms
+  - waiting for locator("button:has-text('Save Changes')")
+    34 × locator resolved to <button disabled type="submit" buttontype="primary" class="sc-jUkaYT kfipNq">Save Changes</button>
+       - unexpected value "disabled"
+
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 30.132s
+ERROR    utils.decorators:decorators.py:56 ============================================================
+
+ERROR    utils.decorators:decorators.py:53    ❌ FAILED: EditBankDetailsPage.edit_bank_details()
+ERROR    utils.decorators:decorators.py:54    💥 Error: AssertionError: Locator expected to be enabled
+Actual value: disabled 
+Call log:
+  - Expect "to_be_enabled" with timeout 30000ms
+  - waiting for locator("button:has-text('Save Changes')")
+    34 × locator resolved to <button disabled type="submit" buttontype="primary" class="sc-jUkaYT kfipNq">Save Changes</button>
+       - unexpected value "disabled"
+
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 37.228s
+ERROR    utils.decorators:decorators.py:56 ============================================================
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:24 
 ################################################################################
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:24 🏁 FINISHED TEST: test_to_edit_new_emergency_contact
-INFO     tests_pages.test_self_service_emergency_contact:test_self_service_emergency_contact.py:25 ################################################################################
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:25 🏁 FINISHED TEST: test_to_edit_bank_details
+INFO     tests_pages.test_self_service_bank_details:test_self_service_bank_details.py:26 ################################################################################
 
 INFO     conftest:conftest.py:228 
 ============================================================
@@ -389,7 +339,7 @@ INFO     pages.base_page:base_page.py:559       Text: 'MM'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.106s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.125s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -402,14 +352,14 @@ INFO     pages.base_page:base_page.py:559       Text: 'Logout'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.352s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 10.453s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized HomePage
 INFO     pages.home_page:home_page.py:22 🏗️ Initialized HomePage - URL: https://candileasing.netlify.app/
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: <pages.home_page.HomePage object at 0x7f6f34e30310>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.459s
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.home_page.HomePage object at 0x7fd1e00209d0>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 10.578s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:235 ✅ Logout successful
@@ -419,5 +369,5 @@ INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candilea
 INFO     conftest:conftest.py:134 📋 Closing browser context
 INFO     conftest:conftest.py:302 
 ################################################################################
-INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_to_edit_new_emergency_contact
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_to_edit_bank_details
 INFO     conftest:conftest.py:304 ################################################################################

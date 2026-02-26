@@ -25,13 +25,13 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.942s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.833s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.149s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.156s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:102 📋 Step 2: Enter no username and no password and click button
@@ -47,12 +47,12 @@ WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: bu
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.189s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.218s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.189s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.219s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:104 📋 Step 3: Verify username error
@@ -79,7 +79,7 @@ INFO     utils.decorators:decorators.py:45 =====================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.009s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.008s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:106 📋 Step 4: Verify username error visible
@@ -113,13 +113,13 @@ INFO     pages.base_page:base_page.py:388 🔍 Checking validation error visibil
 INFO     pages.base_page:base_page.py:390    Result: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: True
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.003s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:97  Result: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: True
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.005s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
 INFO     utils.decorators:decorators.py:45 ============================================================
 INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
 INFO     conftest:conftest.py:134 📋 Closing browser context

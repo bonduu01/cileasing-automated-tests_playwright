@@ -1,6 +1,6 @@
 INFO     conftest:conftest.py:296 
 ################################################################################
-INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_to_add_new_bank_details
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_login_with_no_password
 INFO     conftest:conftest.py:298 ################################################################################
 
 INFO     conftest:conftest.py:106 📋 Creating new browser context
@@ -9,13 +9,11 @@ INFO     conftest:conftest.py:130    ✅ Context created (timeout=30000ms)
 INFO     conftest:conftest.py:145 📄 Creating new page
 INFO     conftest:conftest.py:151    📏 Verified viewport: 1920x1080
 INFO     conftest:conftest.py:152    📍 Initial URL: about:blank
-INFO     conftest:conftest.py:197 
-============================================================
-INFO     conftest:conftest.py:198 🔐 AUTHENTICATION SETUP
-INFO     conftest:conftest.py:199 ============================================================
+INFO     conftest:conftest.py:175 🏗️ Creating LoginPage fixture
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized LoginPage
 INFO     pages.login_page:login_page.py:18 🏗️ Initialized LoginPage - URL: https://candileasing.netlify.app/
-INFO     conftest:conftest.py:204 📋 Step 1: Navigate to login page
+INFO     tests_pages.test_user_logins:test_user_logins.py:85 📋 Test Login with no password
+INFO     tests_pages.test_user_logins:test_user_logins.py:86 📋 Step 1: Navigate to login page
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.go_to_login_page()
 INFO     utils.decorators:decorators.py:76 📍 Before: URL=about:blank, Title=
@@ -27,44 +25,41 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.254s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.823s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.977s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.124s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     conftest:conftest.py:207 📋 Step 2: Perform login
+INFO     tests_pages.test_user_logins:test_user_logins.py:88 📋 Step 2: Enter wrong username and no password
 INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.login_user()
-INFO     utils.decorators:decorators.py:33    📥 Kwargs: {'email': 'ekundayorotimi@gmail.com', 'password': 'PAa@12345'}
-INFO     pages.login_page:login_page.py:33 🔐 Attempting login with email: ekundayorotimi@gmail.com
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.enter_email()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('bonduu001@yahoo.com',)
+INFO     pages.login_page:login_page.py:44 📧 Entering email: bonduu001@yahoo.com
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="email"]', 'ekundayorotimi@gmail.com')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="email"], Value: ekundayorotimi@gmail.com
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="email"]', 'bonduu001@yahoo.com')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="email"], Value: bonduu001@yahoo.com
 INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 0
 WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: input[name="email"]
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.341s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.179s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.fill_input()
-INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="password"]', 'PAa@12345')
-INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="password"], Value: PAa@12345
-INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
-INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
-INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.140s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.180s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
+INFO     tests_pages.test_user_logins:test_user_logins.py:90 📋 Step 3: Click login button
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_login_button()
+INFO     pages.login_page:login_page.py:56 🖱️ Clicking login button
 INFO     utils.decorators:decorators.py:26 ============================================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_element()
 INFO     utils.decorators:decorators.py:31    📥 Args: ('button[type="submit"][buttontype="primary"]',)
@@ -75,64 +70,53 @@ INFO     pages.base_page:base_page.py:559       Text: 'Proceed'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.143s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.079s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     pages.login_page:login_page.py:39 ✅ Login form submitted
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.630s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.080s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     conftest:conftest.py:213 📋 Step 3: Verify login successful
+INFO     tests_pages.test_user_logins:test_user_logins.py:92 📋 Step 4: Verify password error
 INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_login_successful_load_companies()
-INFO     pages.login_page:login_page.py:62 ✅ Verifying successful login - checking for company list
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_password_blank_error()
+INFO     pages.login_page:login_page.py:82 🔍 Verifying password blank error
 INFO     utils.decorators:decorators.py:26 ============================================================
-INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_element_visible()
-INFO     utils.decorators:decorators.py:31    📥 Args: ("div.uppercase:has-text('DEFAULT')",)
-INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.uppercase:has-text('DEFAULT')
-ERROR    pages.base_page:base_page.py:301    ❌ Element not visible: Locator expected to be visible
-Actual value: None
-Error: element(s) not found 
-Call log:
-  - Expect "to_be_visible" with timeout 5000ms
-  - waiting for locator("div.uppercase:has-text('DEFAULT')")
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_validation_error()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Password cannot be blank',)
+INFO     pages.base_page:base_page.py:372 ⚠️ Verifying validation error: Password cannot be blank
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.005s
+INFO     utils.decorators:decorators.py:45 ============================================================
 
-INFO     pages.base_page:base_page.py:578    📸 Screenshot saved: screenshots/verify_visible_error_1771993359.png
-ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.verify_element_visible()
-ERROR    utils.decorators:decorators.py:54    💥 Error: AssertionError: Locator expected to be visible
-Actual value: None
-Error: element(s) not found 
-Call log:
-  - Expect "to_be_visible" with timeout 5000ms
-  - waiting for locator("div.uppercase:has-text('DEFAULT')")
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.006s
+INFO     utils.decorators:decorators.py:45 ============================================================
 
-ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 5.509s
-ERROR    utils.decorators:decorators.py:56 ============================================================
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.is_password_blank_error_visible()
+INFO     pages.login_page:login_page.py:95 👁️ Checking password blank error visibility
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.is_validation_error_visible()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('Password cannot be blank',)
+INFO     pages.base_page:base_page.py:388 🔍 Checking validation error visibility: Password cannot be blank
+INFO     pages.base_page:base_page.py:390    Result: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: True
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.003s
+INFO     utils.decorators:decorators.py:45 ============================================================
 
-ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.verify_login_successful_load_companies()
-ERROR    utils.decorators:decorators.py:54    💥 Error: AssertionError: Locator expected to be visible
-Actual value: None
-Error: element(s) not found 
-Call log:
-  - Expect "to_be_visible" with timeout 5000ms
-  - waiting for locator("div.uppercase:has-text('DEFAULT')")
-
-ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 5.509s
-ERROR    utils.decorators:decorators.py:56 ============================================================
-
-ERROR    conftest:conftest.py:239 ❌ Authentication setup failed: Locator expected to be visible
-Actual value: None
-Error: element(s) not found 
-Call log:
-  - Expect "to_be_visible" with timeout 5000ms
-  - waiting for locator("div.uppercase:has-text('DEFAULT')")
-
-ERROR    conftest:conftest.py:246    📸 Error screenshot: screenshots/auth_error_1771993359.png
+INFO     pages.login_page:login_page.py:97  Result: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: True
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.004s
+INFO     utils.decorators:decorators.py:45 ============================================================
 INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
 INFO     conftest:conftest.py:134 📋 Closing browser context
 INFO     conftest:conftest.py:302 
 ################################################################################
-INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_to_add_new_bank_details
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_login_with_no_password
 INFO     conftest:conftest.py:304 ################################################################################

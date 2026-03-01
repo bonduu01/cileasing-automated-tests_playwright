@@ -250,7 +250,7 @@ jobs:
 
       - name: Download all test results
         if: steps.check_tests.outputs.has_results == 'true'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: all-results
 

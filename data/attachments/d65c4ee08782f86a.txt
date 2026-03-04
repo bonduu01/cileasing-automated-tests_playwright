@@ -12,7 +12,7 @@ INFO     conftest:conftest.py:83 🌐 Launching browser (headless=True, slow_mo=
 INFO     conftest:conftest.py:91    ✅ Browser launched: chromium
 INFO     conftest:conftest.py:296 
 ################################################################################
-INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_to_edit_new_emergency_contact
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_to_edit_identity
 INFO     conftest:conftest.py:298 ################################################################################
 
 INFO     conftest:conftest.py:106 📋 Creating new browser context
@@ -36,35 +36,38 @@ INFO     utils.decorators:decorators.py:26 =====================================
 INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.navigate_to()
 INFO     utils.decorators:decorators.py:31    📥 Args: ('https://candileasing.netlify.app/',)
 INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.app/, Wait: networkidle
-ERROR    pages.base_page:base_page.py:43    ❌ Navigation failed: Page.goto: net::ERR_CONNECTION_RESET at https://candileasing.netlify.app/
+ERROR    pages.base_page:base_page.py:43    ❌ Navigation failed: Page.goto: Timeout 30000ms exceeded.
 Call log:
   - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
 
-INFO     pages.base_page:base_page.py:578    📸 Screenshot saved: screenshots/navigation_error_1772511357.png
+WARNING  pages.base_page:base_page.py:580    ⚠️ Screenshot failed: Page.screenshot: Timeout 30000ms exceeded.
+Call log:
+  - taking page screenshot
+  - waiting for fonts to load...
+  - fonts loaded
+
 ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.navigate_to()
-ERROR    utils.decorators:decorators.py:54    💥 Error: Error: Page.goto: net::ERR_CONNECTION_RESET at https://candileasing.netlify.app/
+ERROR    utils.decorators:decorators.py:54    💥 Error: TimeoutError: Page.goto: Timeout 30000ms exceeded.
 Call log:
   - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
 
-ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 0.248s
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 60.013s
 ERROR    utils.decorators:decorators.py:56 ============================================================
 
 ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.go_to_login_page()
-ERROR    utils.decorators:decorators.py:54    💥 Error: Error: Page.goto: net::ERR_CONNECTION_RESET at https://candileasing.netlify.app/
+ERROR    utils.decorators:decorators.py:54    💥 Error: TimeoutError: Page.goto: Timeout 30000ms exceeded.
 Call log:
   - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
 
-ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 0.260s
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 60.024s
 ERROR    utils.decorators:decorators.py:56 ============================================================
 
-ERROR    conftest:conftest.py:239 ❌ Authentication setup failed: Page.goto: net::ERR_CONNECTION_RESET at https://candileasing.netlify.app/
+ERROR    conftest:conftest.py:239 ❌ Authentication setup failed: Page.goto: Timeout 30000ms exceeded.
 Call log:
   - navigating to "https://candileasing.netlify.app/", waiting until "networkidle"
-
-ERROR    conftest:conftest.py:246    📸 Error screenshot: screenshots/auth_error_1772511357.png
-INFO     conftest:conftest.py:156 📄 Closing page (final URL: chrome-error://chromewebdata/)
+INFO     conftest:conftest.py:156 📄 Closing page (final URL: about:blank)
 INFO     conftest:conftest.py:134 📋 Closing browser context
 INFO     conftest:conftest.py:302 
 ################################################################################
-INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_to_edit_new_emergency_contact
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_to_edit_identity
 INFO     conftest:conftest.py:304 ################################################################################

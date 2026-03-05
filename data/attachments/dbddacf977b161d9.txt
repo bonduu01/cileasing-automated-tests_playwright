@@ -1,0 +1,292 @@
+INFO     conftest:conftest.py:296 
+################################################################################
+INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_edit_personal_details
+INFO     conftest:conftest.py:298 ################################################################################
+
+INFO     conftest:conftest.py:106 📋 Creating new browser context
+INFO     conftest:conftest.py:112    📏 Setting viewport to: 1920x1080
+INFO     conftest:conftest.py:130    ✅ Context created (timeout=30000ms)
+INFO     conftest:conftest.py:145 📄 Creating new page
+INFO     conftest:conftest.py:151    📏 Verified viewport: 1920x1080
+INFO     conftest:conftest.py:152    📍 Initial URL: about:blank
+INFO     conftest:conftest.py:197 
+============================================================
+INFO     conftest:conftest.py:198 🔐 AUTHENTICATION SETUP
+INFO     conftest:conftest.py:199 ============================================================
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized LoginPage
+INFO     pages.login_page:login_page.py:18 🏗️ Initialized LoginPage - URL: https://candileasing.netlify.app/
+INFO     conftest:conftest.py:204 📋 Step 1: Navigate to login page
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.go_to_login_page()
+INFO     utils.decorators:decorators.py:76 📍 Before: URL=about:blank, Title=
+INFO     pages.login_page:login_page.py:24 🔄 Navigating to login page: https://candileasing.netlify.app/
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.navigate_to()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('https://candileasing.netlify.app/',)
+INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.app/, Wait: networkidle
+INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.910s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.375s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     conftest:conftest.py:207 📋 Step 2: Perform login
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.login_user()
+INFO     utils.decorators:decorators.py:33    📥 Kwargs: {'email': 'ekundayorotimi@gmail.com', 'password': 'PAa@12345'}
+INFO     pages.login_page:login_page.py:33 🔐 Attempting login with email: ekundayorotimi@gmail.com
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.fill_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="email"]', 'ekundayorotimi@gmail.com')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="email"], Value: ekundayorotimi@gmail.com
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 0
+WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: input[name="email"]
+INFO     pages.base_page:base_page.py:121    ✅ Fill successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.225s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.fill_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="password"]', 'PAa@12345')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="password"], Value: PAa@12345
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:121    ✅ Fill successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.046s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('button[type="submit"][buttontype="primary"]',)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: button[type="submit"][buttontype="primary"]
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:559       Text: 'Proceed'
+INFO     pages.base_page:base_page.py:93    ✅ Click successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.115s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.login_page:login_page.py:39 ✅ Login form submitted
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.387s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     conftest:conftest.py:213 📋 Step 3: Verify login successful
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_login_successful_load_companies()
+INFO     pages.login_page:login_page.py:62 ✅ Verifying successful login - checking for company list
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_element_visible()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("div.uppercase:has-text('DEFAULT')",)
+INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.uppercase:has-text('DEFAULT')
+INFO     pages.base_page:base_page.py:299    ✅ Element is visible
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.863s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.verify_element_visible()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('div.space-y-4 div.uppercase:text-is("FLOUR MILLS NIGERIA LIMITED GOLDEN NOODLES & PASTA IGANMU")',)
+INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.space-y-4 div.uppercase:text-is("FLOUR MILLS NIGERIA LIMITED GOLDEN NOODLES & PASTA IGANMU")
+INFO     pages.base_page:base_page.py:299    ✅ Element is visible
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.007s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.login_page:login_page.py:65 ✅ Company list verified
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.871s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     conftest:conftest.py:216 📋 Step 4: Click default company link
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_default_company_link()
+INFO     utils.decorators:decorators.py:76 📍 Before: URL=https://candileasing.netlify.app/, Title=CAndILeasing
+INFO     pages.login_page:login_page.py:112 🖱️ Clicking default company link
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: LoginPage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('text="DEFAULT"',)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: text="DEFAULT"
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:559       Text: 'DEFAULT'
+INFO     pages.base_page:base_page.py:93    ✅ Click successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.209s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.login_page:login_page.py:114 ✅ Navigating to Self Service page
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized SelfServicePage
+INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/personal/self-service, Title=CAndILeasing
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.self_service_page.SelfServicePage object at 0x7ff1682dfdd0>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.216s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     conftest:conftest.py:219 📋 Step 5: Verify self-service page loads
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.verify_self_service_page_loads()
+INFO     pages.self_service_page:self_service_page.py:35 ✅ Verify Logged in user
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.verify_element_visible()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('span.text-dark0b.font-\\[400\\].text-\\[14px\\]',)
+INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: span.text-dark0b.font-\[400\].text-\[14px\]
+INFO     pages.base_page:base_page.py:299    ✅ Element is visible
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.357s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.358s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     conftest:conftest.py:222 ✅ Authentication successful
+INFO     conftest:conftest.py:223 ============================================================
+
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:30 📋 Authenticate User module
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized SelfServicePage
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:17 
+################################################################################
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:18 🧪 STARTING TEST: test_edit_personal_details
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:19 ################################################################################
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:40 📋 Test go to Edit Personal Details
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:42 📍 Current URL: https://candileasing.netlify.app/personal/self-service
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:43 📍 Page Title: CAndILeasing
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:55 🔍 Edit link visible: True
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:56 🔍 Edit link count: 1
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:59 🔍 Edit link text: Edit
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_to_edit_personal_data_details()
+INFO     pages.self_service_page:self_service_page.py:50 🖱️ Clicking edit personal data link
+INFO     pages.self_service_page:self_service_page.py:70 ✅ Edit link clicked successfully
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized EditSelfServicePage
+INFO     pages.edit_self_service_page:edit_self_service_page.py:21 📍 Edit Service URL: https://candileasing.netlify.app/personal/self-service/personal-data/edit
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.edit_self_service_page.EditSelfServicePage object at 0x7ff1682dfd90>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.095s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:65 📍 After click URL: https://candileasing.netlify.app/personal/self-service/personal-data/edit
+INFO     pages.edit_self_service_page:edit_self_service_page.py:31 📍 Current URL: https://candileasing.netlify.app/personal/self-service/personal-data/edit
+INFO     pages.edit_self_service_page:edit_self_service_page.py:32 📍 Page Title: CAndILeasing
+INFO     pages.edit_self_service_page:edit_self_service_page.py:33 Other Name: OLADEJO
+INFO     pages.edit_self_service_page:edit_self_service_page.py:34 Other Name: HEAD OF IT
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditSelfServicePage.fill_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("input[name='otherName']", 'OLADEJO')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name='otherName'], Value: OLADEJO
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 0
+WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: input[name='otherName']
+INFO     pages.base_page:base_page.py:121    ✅ Fill successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.809s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditSelfServicePage.fill_input()
+INFO     utils.decorators:decorators.py:31    📥 Args: ('input[name="jobTitle"]', 'HEAD OF IT')
+INFO     pages.base_page:base_page.py:102 ✍️ Selector: input[name="jobTitle"], Value: HEAD OF IT
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:121    ✅ Fill successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.089s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: EditSelfServicePage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("button:has-text('Submit')",)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: button:has-text('Submit')
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:559       Text: 'Submit'
+INFO     pages.base_page:base_page.py:93    ✅ Click successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.146s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:75 ✅ Edit action successful
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:23 
+################################################################################
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:24 🏁 FINISHED TEST: test_edit_personal_details
+INFO     tests_pages.test_self_service_personal_data:test_self_service_personal_data.py:25 ################################################################################
+
+INFO     conftest:conftest.py:228 
+============================================================
+INFO     conftest:conftest.py:229 🔐 AUTHENTICATION TEARDOWN
+INFO     conftest:conftest.py:230 ============================================================
+INFO     conftest:conftest.py:231 📋 Logging out...
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_to_logout()
+INFO     pages.self_service_page:self_service_page.py:41 🖱️ Click to logout
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("span.ant-avatar-string:has-text('MM')",)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: span.ant-avatar-string:has-text('MM')
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
+INFO     pages.base_page:base_page.py:559       Text: 'MM'
+INFO     pages.base_page:base_page.py:93    ✅ Click successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.114s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     utils.decorators:decorators.py:26 ============================================================
+INFO     utils.decorators:decorators.py:27 🔵 ENTERING: SelfServicePage.click_element()
+INFO     utils.decorators:decorators.py:31    📥 Args: ("p.text-danger:has-text('Logout')",)
+INFO     pages.base_page:base_page.py:71 🖱️ Selector: p.text-danger:has-text('Logout')
+INFO     pages.base_page:base_page.py:548    🔍 Element state - Count: 1
+INFO     pages.base_page:base_page.py:553       Visible: False, Enabled: True
+INFO     pages.base_page:base_page.py:559       Text: 'Logout'
+INFO     pages.base_page:base_page.py:93    ✅ Click successful
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: None
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.390s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     pages.base_page:base_page.py:29 🏗️ Initialized HomePage
+INFO     pages.home_page:home_page.py:22 🏗️ Initialized HomePage - URL: https://candileasing.netlify.app/
+INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.home_page.HomePage object at 0x7ff16814c8d0>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.504s
+INFO     utils.decorators:decorators.py:45 ============================================================
+
+INFO     conftest:conftest.py:235 ✅ Logout successful
+INFO     conftest:conftest.py:236 ============================================================
+
+INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
+INFO     conftest:conftest.py:134 📋 Closing browser context
+INFO     conftest:conftest.py:302 
+################################################################################
+INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_edit_personal_details
+INFO     conftest:conftest.py:304 ################################################################################
+
+INFO     conftest:conftest.py:95 🌐 Closing browser
+INFO     conftest:conftest.py:73 🎭 Closing Playwright instance
+INFO     conftest:conftest.py:56 
+================================================================================
+INFO     conftest:conftest.py:57 ✅ TEST RUN COMPLETED
+INFO     conftest:conftest.py:58 ================================================================================

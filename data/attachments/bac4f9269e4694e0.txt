@@ -39,13 +39,13 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.039s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.890s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 3.082s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.859s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:207 📋 Step 2: Perform login
@@ -62,7 +62,7 @@ WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: in
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.560s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.530s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -74,7 +74,7 @@ INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.199s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.195s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -87,13 +87,13 @@ INFO     pages.base_page:base_page.py:559       Text: 'Proceed'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.219s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.198s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:39 ✅ Login form submitted
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.979s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.927s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     conftest:conftest.py:213 📋 Step 3: Verify login successful
@@ -111,7 +111,7 @@ Call log:
   - Expect "to_be_visible" with timeout 5000ms
   - waiting for locator("div.uppercase:has-text('DEFAULT')")
 
-INFO     pages.base_page:base_page.py:578    📸 Screenshot saved: screenshots/verify_visible_error_1773030000.png
+INFO     pages.base_page:base_page.py:578    📸 Screenshot saved: screenshots/verify_visible_error_1773115884.png
 ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.verify_element_visible()
 ERROR    utils.decorators:decorators.py:54    💥 Error: AssertionError: Locator expected to be visible
 Actual value: None
@@ -120,7 +120,7 @@ Call log:
   - Expect "to_be_visible" with timeout 5000ms
   - waiting for locator("div.uppercase:has-text('DEFAULT')")
 
-ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 5.610s
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 5.743s
 ERROR    utils.decorators:decorators.py:56 ============================================================
 
 ERROR    utils.decorators:decorators.py:53    ❌ FAILED: LoginPage.verify_login_successful_load_companies()
@@ -131,7 +131,7 @@ Call log:
   - Expect "to_be_visible" with timeout 5000ms
   - waiting for locator("div.uppercase:has-text('DEFAULT')")
 
-ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 5.611s
+ERROR    utils.decorators:decorators.py:55    ⏱️  Time: 5.743s
 ERROR    utils.decorators:decorators.py:56 ============================================================
 
 ERROR    conftest:conftest.py:239 ❌ Authentication setup failed: Locator expected to be visible
@@ -141,7 +141,7 @@ Call log:
   - Expect "to_be_visible" with timeout 5000ms
   - waiting for locator("div.uppercase:has-text('DEFAULT')")
 
-ERROR    conftest:conftest.py:246    📸 Error screenshot: screenshots/auth_error_1773030001.png
+ERROR    conftest:conftest.py:246    📸 Error screenshot: screenshots/auth_error_1773115885.png
 INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
 INFO     conftest:conftest.py:134 📋 Closing browser context
 INFO     conftest:conftest.py:302 

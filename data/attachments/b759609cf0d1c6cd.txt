@@ -25,13 +25,13 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.179s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.940s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.471s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.150s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:33 📋 Step 2: Perform login
@@ -48,7 +48,7 @@ WARNING  pages.base_page:base_page.py:563    ⚠️ Element not found in DOM: in
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.166s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.144s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -60,7 +60,7 @@ INFO     pages.base_page:base_page.py:553       Visible: True, Enabled: True
 INFO     pages.base_page:base_page.py:121    ✅ Fill successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.098s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.079s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -73,13 +73,13 @@ INFO     pages.base_page:base_page.py:559       Text: 'Proceed'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.094s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.115s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:39 ✅ Login form submitted
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.361s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.340s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:38 📋 Step 3: Verify login successful
@@ -93,7 +93,7 @@ INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.upperca
 INFO     pages.base_page:base_page.py:299    ✅ Element is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.959s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.870s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -103,13 +103,13 @@ INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: div.space-y
 INFO     pages.base_page:base_page.py:299    ✅ Element is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.032s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.006s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:65 ✅ Company list verified
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.992s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.878s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:41 📋 Step 4: Click default company
@@ -127,15 +127,15 @@ INFO     pages.base_page:base_page.py:559       Text: 'DEFAULT'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.234s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.238s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.login_page:login_page.py:114 ✅ Navigating to Self Service page
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized SelfServicePage
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/personal/self-service, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: <pages.self_service_page.SelfServicePage object at 0x7f6071116750>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.255s
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.self_service_page.SelfServicePage object at 0x7f3f844eee90>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.244s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:44 📋 Step 5: Verify self-service page loads
@@ -149,12 +149,12 @@ INFO     pages.base_page:base_page.py:296 👁️ Verifying visible: span.text-d
 INFO     pages.base_page:base_page.py:299    ✅ Element is visible
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.357s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.859s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.358s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.860s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:47 📋 Step 6: Logout
@@ -171,7 +171,7 @@ INFO     pages.base_page:base_page.py:559       Text: 'MM'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.123s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.115s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:26 ============================================================
@@ -184,14 +184,14 @@ INFO     pages.base_page:base_page.py:559       Text: 'Logout'
 INFO     pages.base_page:base_page.py:93    ✅ Click successful
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.381s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.363s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.base_page:base_page.py:29 🏗️ Initialized HomePage
 INFO     pages.home_page:home_page.py:22 🏗️ Initialized HomePage - URL: https://candileasing.netlify.app/
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
-INFO     utils.decorators:decorators.py:43    📤 Return: <pages.home_page.HomePage object at 0x7f60711b5010>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.506s
+INFO     utils.decorators:decorators.py:43    📤 Return: <pages.home_page.HomePage object at 0x7f3f843b9250>
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.479s
 INFO     utils.decorators:decorators.py:45 ============================================================
 INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
 INFO     conftest:conftest.py:134 📋 Closing browser context

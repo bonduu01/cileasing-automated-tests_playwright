@@ -1,3 +1,15 @@
+INFO     conftest:conftest.py:39 ================================================================================
+INFO     conftest:conftest.py:40 🚀 TEST RUN STARTED
+INFO     conftest:conftest.py:41    📸 Screenshots: screenshots/
+INFO     conftest:conftest.py:42    🎥 Videos: disabled
+INFO     conftest:conftest.py:43    🌐 Headless: True
+INFO     conftest:conftest.py:44    ⏱️  Timeout: 30000ms
+INFO     conftest:conftest.py:45    📏 Default Viewport: 1920x1080
+INFO     conftest:conftest.py:46 ================================================================================
+
+INFO     conftest:conftest.py:68 🎭 Starting Playwright instance
+INFO     conftest:conftest.py:83 🌐 Launching browser (headless=True, slow_mo=0)
+INFO     conftest:conftest.py:91    ✅ Browser launched: chromium
 INFO     conftest:conftest.py:296 
 ################################################################################
 INFO     conftest:conftest.py:297 🧪 STARTING TEST: test_go_to_home_page_with_pom
@@ -25,13 +37,13 @@ INFO     pages.base_page:base_page.py:36 🌐 URL: https://candileasing.netlify.
 INFO     pages.base_page:base_page.py:40    📊 Status: 200, OK: True
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: <Response url='https://candileasing.netlify.app/' request=<Request url='https://candileasing.netlify.app/' method='GET'>>
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.859s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.695s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     utils.decorators:decorators.py:81 📍 After: URL=https://candileasing.netlify.app/, Title=CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 1.198s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 2.896s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     tests_pages.test_user_logins:test_user_logins.py:23 📋 Step 2: Verify home page loaded
@@ -44,13 +56,13 @@ INFO     utils.decorators:decorators.py:31    📥 Args: ('CAndILeasing',)
 INFO     pages.base_page:base_page.py:284 📄 Verifying title: CAndILeasing
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.028s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.036s
 INFO     utils.decorators:decorators.py:45 ============================================================
 
 INFO     pages.base_page:base_page.py:318 🚫 Verifying disabled: input[name='password'][type='password']
 INFO     utils.decorators:decorators.py:42    ✅ SUCCESS
 INFO     utils.decorators:decorators.py:43    📤 Return: None
-INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.122s
+INFO     utils.decorators:decorators.py:44    ⏱️  Time: 0.101s
 INFO     utils.decorators:decorators.py:45 ============================================================
 INFO     conftest:conftest.py:156 📄 Closing page (final URL: https://candileasing.netlify.app/)
 INFO     conftest:conftest.py:134 📋 Closing browser context
@@ -58,10 +70,3 @@ INFO     conftest:conftest.py:302
 ################################################################################
 INFO     conftest:conftest.py:303 🏁 FINISHED TEST: test_go_to_home_page_with_pom
 INFO     conftest:conftest.py:304 ################################################################################
-
-INFO     conftest:conftest.py:95 🌐 Closing browser
-INFO     conftest:conftest.py:73 🎭 Closing Playwright instance
-INFO     conftest:conftest.py:56 
-================================================================================
-INFO     conftest:conftest.py:57 ✅ TEST RUN COMPLETED
-INFO     conftest:conftest.py:58 ================================================================================

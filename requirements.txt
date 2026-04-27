@@ -3,9 +3,9 @@ playwright>=1.58.0
 pytest>=9.0.2
 pytest-playwright>=0.4.4
 pytest-html>=4.2.0
-pytest-timeout>=2.2.0  # For test timeouts
-pytest-rerunfailures>=12.0  # For flaky test retry
-pytest-base-url>=2.0.0  # For base URL configuration
+pytest-timeout>=2.4.0  # For test timeouts
+pytest-rerunfailures>=16.1  # For flaky test retry
+pytest-base-url>=2.1.0  # For base URL configuration
 
 # Configuration management
 pydantic>=2.5.0
@@ -14,17 +14,17 @@ python-dotenv>=1.0.0
 
 # Optional: Reporting
 allure-pytest>=2.13.2
-allure-python-commons>=2.13.2
+allure-python-commons>=2.16.0
 
 # Optional: Parallel execution
-pytest-xdist>=3.5.0
+pytest-xdist>=3.8.0
 
 # Utilities
-pillow>=10.1.0  # For image processing
-requests>=2.31.0  # For API calls if needed
+pillow>=12.2.0  # For image processing
+requests>=2.33.1  # For API calls if needed
 
 # Code Quality (optional but recommended)
 black>=23.12.0
-flake8>=6.1.0
-pylint>=3.0.0
+flake8>=7.3.0
+pylint>=4.0.5
 mypy>=1.7.0
